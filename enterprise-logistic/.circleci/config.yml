@@ -1,0 +1,25 @@
+
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+jobs:
+  lint:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      steps:
+      - run: yarn install
+      - run: yarn lint:ci
+
+  test:
+    executor:
+      name: node/default
+    steps:
+      - run: yarn test
+
+workflows:
+  test-and-deploy:
+    jobs:
+      - lint
+      - test
