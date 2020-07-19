@@ -6,19 +6,21 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+     <nav>Actualizar Rutas</nav>
       </header>
+      <body  className="App-body">
+        <text>Ingrese el Departamento </text>
+        <input type="Departamento" class="input-large" placeholder="Departamento" name="iDepartamento" id="iDepartamento"></input>
+        <text>Ingrese la ciudad</text>
+        <input type="ciudad" class="input-large" placeholder="ciudad" name="iciudad" id="iciudad"></input>
+        <text>Ingrese la calle o carrera</text>
+        <input type="calle o carrera" class="input-large" placeholder="calle o carrera" name="icalleocarrera" id="icalleocarrera"></input>
+        <text>ingrese el numero</text>
+        <input type="numero" class="input-large" placeholder="numero" name="inumero" id="inumero"></input>
+        <br></br>
+        <button type="button" >Actualizar</button><button type="button" >Cancelar</button>     
+      </body>
+      <footer>Enterprise_logistic</footer>
     </div>
   );
 }
