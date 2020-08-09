@@ -54,7 +54,7 @@ export default function FormDialog({ buttonLabel, title, description, fields, op
                 style={styles.fieldInput}
                 autoFocus
                 margin="dense"
-                id="`${fields}-id`"
+                id={field}
                 label={field}
                 type="text"
                 fullWidth

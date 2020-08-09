@@ -2,14 +2,8 @@ import React from "react";
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-
-import CrudInput from './children/crudInput.js';
-import CrudButton from './children/crudButton.js';
 import CrudTable from './children/crudTable.js';
-import CrudActionButton from './children/crudActionButton.js';
-
 import Dialog from '../dialog'
-import styles from './styles.js'
 
 const Crud = ({label, data, dialogBtnLabel, buttonPosition, dialogDescription}) => {
   return (

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import MainTheme from './components/themes/mainTheme';
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';

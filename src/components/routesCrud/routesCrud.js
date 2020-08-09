@@ -2,8 +2,6 @@ import React from "react";
 import Crud from '../crud';
 //import getRoutes from '../../services/services.js'
 
-import styles from './styles.js'
-
 const RoutesCrud = () => {
   const routes = [
     {
