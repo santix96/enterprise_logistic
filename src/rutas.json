@@ -1,0 +1,29 @@
+{
+    "rutas":[
+        {
+            
+                    "nombre":"zona1",
+                    "ciudad":"Manizales",
+                    "barrios":[
+                        {"nombre":"cervantes"},
+                        {"nombre":"sierra morena"}
+                    ],
+                    "transportador":"juan",
+                    "vehiculo":"Mazda SUPRA"
+                
+           
+        },
+        {
+                "nombre":"zona2",
+                "ciudad":"Manizales",
+                "barrios":[
+                    {"nombre":"san joaquin"},
+                    {"nombre":"san jose"}
+                ],
+                "transportador":"cristian",
+                "vehiculo":"lamborgini"
+            
+        }
+
+    ]
+}
