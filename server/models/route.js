@@ -9,7 +9,7 @@ const routeSchema = new mongoose.Schema(
     type: {
       type: String,
       unique: true,
-      retuired: true,
+      required: true,
     }
   },
   { timestamps: true },

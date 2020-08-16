@@ -5,7 +5,7 @@ const zoneSchema = new mongoose.Schema(
     name: {
       type: String,
       unique: true,
-      retuired: true,
+      required: true,
     },
   },
   { timestamps: true },

@@ -1,7 +1,7 @@
 // Import models
 import
 models, {
-  connectDb
+  connectDb, seedInitialData
 } from './models';
 
 // Import express framework
@@ -18,6 +18,9 @@ const cors = require('cors')
 // Import routes
 const homeRouter = require('./routes/homeRoute')
 const routeRouter = require('./routes/routeRoute')
+const productRouter = require('./routes/productRoute')
+const cityRouter = require('./routes/cityRoute')
+
 
 // Setup default port
 const PORT = process.env.PORT || 4000
@@ -42,15 +45,16 @@ if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
     })
   })
 }
-
-// Implement route for '/api' endpoint
 app.use('/api', homeRouter)
-
-// Implement route for '/users' endpoint
-// ! Note:
-// '/users' will prefix all post routes
-// with '/users' => '/all' will become '/users/all'
+app.use('/ciudades', cityRouter)
+// app.use('/proveedores', providerRouter)
+// app.use('/distribuidores', distributorRouter)
+// app.use('/ordenes', orderRouter)
+app.use('/productos', productRouter)
 app.use('/rutas', routeRouter)
+// app.use('/transacciones', transactiontRouter)
+// app.use('/zonas', zoneRouter)
+
 // Implement route for errors
 app.use((err, req, res, next) => {
   console.error(err.stack)
@@ -61,5 +65,6 @@ app.use((err, req, res, next) => {
 connectDb().then(async () => {
   app.listen(PORT, function() {
     console.log(`Server is running on: ${PORT}`);
+    //seedInitialData();
   });
 });
