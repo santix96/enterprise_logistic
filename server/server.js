@@ -1,7 +1,7 @@
 // Import models
 import
 models, {
-  connectDb
+  connectDb, seedInitialData
 } from './models';
 
 // Import express framework
@@ -18,6 +18,8 @@ const cors = require('cors')
 // Import routes
 const homeRouter = require('./routes/homeRoute')
 const routeRouter = require('./routes/routeRoute')
+const productRouter = require('./routes/productRoute')
+
 
 // Setup default port
 const PORT = process.env.PORT || 4000
@@ -51,6 +53,7 @@ app.use('/api', homeRouter)
 // '/users' will prefix all post routes
 // with '/users' => '/all' will become '/users/all'
 app.use('/rutas', routeRouter)
+app.use('/productos', productRouter)
 // Implement route for errors
 app.use((err, req, res, next) => {
   console.error(err.stack)
@@ -61,5 +64,6 @@ app.use((err, req, res, next) => {
 connectDb().then(async () => {
   app.listen(PORT, function() {
     console.log(`Server is running on: ${PORT}`);
+    //seedInitialData();
   });
 });
