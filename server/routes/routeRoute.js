@@ -1,7 +1,7 @@
 // Import express
 const express = require('express')
 // Import users controller
-const rutaController = require('./../controllers/rutaController.js')
+const routeController = require('./../controllers/routeController.js')
 // Create express router
 const router = express.Router()
 // Create rout between usersController and '/all' endpoint
@@ -11,6 +11,6 @@ const router = express.Router()
 // This means that all users routes
 // will be prefixed with /users'
 // i.e.: '/all' will become '/users/all'
-router.get('/all', rutaController.rutaGetAll)
+router.get('/all', routeController.routeGetAll)
 // Export router
 module.exports = router
