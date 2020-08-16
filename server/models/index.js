@@ -1,15 +1,27 @@
 import mongoose from 'mongoose';
 
-import Zone from './zone';
-import Route from './route';
+import City from './city';
+import Conveyor from './conveyor';
+import Distributor from './distributor';
+import Inventory from './inventory';
 import Neighborhood from './neighborhood';
+import Order from './order';
+import Product from './product';
+import Provider from './provider';
+import Route from './route';
+import Transaction from './transaction';
+import Zone from './zone';
+
 
 const connectDb = () => {
-  return mongoose.connect("mongodb://localhost:27017/enterprise-logistic", { useNewUrlParser: true, useUnifiedTopology: true });
+  return mongoose.connect(
+    "mongodb://localhost:27017/enterpriselogistic",
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  );
 };
 
-const models = { Zone, Route, Neighborhood };
+const models = { City, Conveyor, Distributor, Inventory, Neighborhood, Order, Product, Provider, Route, Transaction, Zone };
 
-export { connectDb };
+export { connectDb, seedInitialData };
 
 export default models;

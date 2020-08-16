@@ -1,8 +1,13 @@
 import mongoose from 'mongoose';
 
-const neighborhoodSchema = new mongoose.Schema(
+const distributorSchema = new mongoose.Schema(
   {
     name: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    address: {
       type: String,
       unique: true,
       required: true,
@@ -15,6 +20,6 @@ const neighborhoodSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-const Neighborhood = mongoose.model('Neighborhood', neighborhoodSchema);
+const Distributor = mongoose.model('Distributor', distributorSchema);
 
-export default Neighborhood;
+export default Distributor;
