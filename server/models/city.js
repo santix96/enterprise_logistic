@@ -9,8 +9,9 @@ const citySchema = new mongoose.Schema(
     },
     neighborhood: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Neighborhood"
+        type: String,
+        unique: true,
+        required: true,
       }
     ],
   },

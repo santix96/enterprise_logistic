@@ -1,7 +1,10 @@
 import models from '../models';
 
-exports.productGetAll = async (req, res) => {
-  // res.send('There will be dragons, not posts.')
-  var products = await models.Product.find({});
-  res.json(products)
+let ProductController = {
+  GetAll: async (req, res) => {
+    var products = await models.Product.find({});
+    res.json(products)
+  }
 }
+
+module.exports = ProductController;

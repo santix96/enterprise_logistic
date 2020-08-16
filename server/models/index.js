@@ -88,7 +88,7 @@ const seedInitialData = async () => {
   /* Agregar Ciudades */
   const city1 = new models.City({
     name: 'Manizales',
-    provider: [
+    neighborhood: [
       "La cabaña",
       "Quiebra de velez",
       "La linda",
