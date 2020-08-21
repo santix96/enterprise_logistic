@@ -18,6 +18,7 @@ const Navigation = () => {
         <Button href="/#" style={styles.navButton}>Pedidos</Button>
         <Button href="/rutas" style={styles.navButton}>Rutas</Button>
         <Button href="/transportadores" style={styles.navButton}>Transportadores</Button>
+        <Button href="/productos" style={styles.navButton}>Productos</Button>
       </Toolbar>
     </AppBar>
   )
