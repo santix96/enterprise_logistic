@@ -7,7 +7,6 @@ models, {
 // Import express framework
 const express = require('express')
 
-
 // Import middleware
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
@@ -20,7 +19,6 @@ const homeRouter = require('./routes/homeRoute')
 const routeRouter = require('./routes/routeRoute')
 const productRouter = require('./routes/productRoute')
 const cityRouter = require('./routes/cityRoute')
-
 
 // Setup default port
 const PORT = process.env.PORT || 4000
@@ -50,8 +48,8 @@ app.use('/ciudades', cityRouter)
 // app.use('/proveedores', providerRouter)
 // app.use('/distribuidores', distributorRouter)
 // app.use('/ordenes', orderRouter)
-app.use('/productos', productRouter)
-app.use('/rutas', routeRouter)
+app.use('/products', productRouter)
+app.use('/routes', routeRouter)
 // app.use('/transacciones', transactiontRouter)
 // app.use('/zonas', zoneRouter)
 
