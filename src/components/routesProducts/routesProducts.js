@@ -9,7 +9,6 @@ import axios from 'axios';
 
 const RoutesProducts = () => {
   const [data, setData] = useState([{"status": "NO DATA"}])
-  const url = 'http://localhost:4000/products/all'
 
   useEffect( async () => {
     let responseData = await getProducts();
