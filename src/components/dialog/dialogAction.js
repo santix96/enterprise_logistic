@@ -13,9 +13,8 @@ import CrudActionButton from '../crud/children/crudActionButton.js'
 import CrudActionButtonStyle from '../crud/styles.js'
 import styles from './styles.js'
 
-export default function FormActionDialog({ title, description, fields, operation }) {
+export default function FormActionDialog({ title, description, fields, operation, disabledFields }) {
   const [open, setOpen] = React.useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -50,18 +49,27 @@ export default function FormActionDialog({ title, description, fields, operation
             {description}
           </DialogContentText>
           {
-            Object.keys(fields).map( (field) => (
-              <TextField
-                style={styles.fieldInput}
-                autoFocus
-                margin="dense"
-                id={field}
-                label={field}
-                type="text"
-                fullWidth
-              />
-            ))
+
+            Object.entries(fields).map((field) => {
+              /* #TODO Recibir por props los campos que se desean bol */
+              const defaultDisabled = field[0] == "_id" || field[0] == "createdAt" || field[0] == "updatedAt" ;
+              return (
+                <TextField
+                  style={styles.fieldInput}
+                  autoFocus
+                  margin="dense"
+                  id={field}
+                  label={field[0]}
+                  type="text"
+                  fullWidth
+                  value={field[1]}
+                  disabled={defaultDisabled ? true : false }
+                />
+              )
+            })
           }
+
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

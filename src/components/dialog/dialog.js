@@ -14,7 +14,6 @@ import styles from './styles.js'
 
 export default function FormDialog({ buttonLabel, title, description, fields, dialogButtonLabel, buttonPosition }) {
   const [open, setOpen] = React.useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };

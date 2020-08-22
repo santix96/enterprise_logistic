@@ -13,11 +13,11 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import styles from '../styles.js';
 
 import CrudActionButton from '../children/crudActionButton'
-
 import ActionDialog from '../../dialog/dialogAction'
 
 const CrudTable = ({title, data, editActionTitle, editActionDescription, ...props}) => {
   const keys = Object.keys(data[0]);
+
   return (
     <TableContainer component={Paper}>
       <Table stickyHeader aria-label="sticky table">
@@ -32,9 +32,9 @@ const CrudTable = ({title, data, editActionTitle, editActionDescription, ...prop
         <TableBody>
           {data.map((item, index) => {
             return (
-              <TableRow align="center" key={item.id}>
+              <TableRow align="center">
                 {
-                  Object.entries(item).map((key) => {
+                  Object.entries(item).map((key, rowIndex) => {
                     return (<TableCell>{ key[1] }</TableCell>)
                   })
                 }
@@ -42,7 +42,7 @@ const CrudTable = ({title, data, editActionTitle, editActionDescription, ...prop
                   <ActionDialog
                     title={editActionTitle}
                     description={editActionDescription}
-                    fields={data[0]}
+                    fields={item}
                     operation='edit'
                   />
                   <CrudActionButton
