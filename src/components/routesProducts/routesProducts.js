@@ -18,21 +18,14 @@ const RoutesProducts = () => {
   }, [])
 
   return (
-    <Crud label = {
-      "Productos"
-    }
-    data = {
-      data
-    }
-    buttonPosition = {
-      "center"
-    }
-    dialogBtnLabel = {
-      "Agregar"
-    }
-    dialogDescription = {
-      "Descripcion de prueba"
-    }
+    <Crud
+      label={"Productos"}
+      data={data}
+      buttonPosition={"center"}
+      dialogBtnLabel={"Agregar"}
+      dialogDescription={"Descripcion de prueba"}
+      dialogActionTitle={"Editar Product"}
+      dialogActionDescription={"Descripcion ..."}
     />
   );
 }

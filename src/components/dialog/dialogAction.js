@@ -9,10 +9,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import CrudButton from '../crud/children/crudButton.js'
+import CrudActionButton from '../crud/children/crudActionButton.js'
+import CrudActionButtonStyle from '../crud/styles.js'
 import styles from './styles.js'
 
-export default function FormDialog({ buttonLabel, title, description, fields, dialogButtonLabel, buttonPosition }) {
+export default function FormActionDialog({ title, description, fields, operation }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -22,15 +23,15 @@ export default function FormDialog({ buttonLabel, title, description, fields, di
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <div>
-      <CrudButton
-        label={buttonLabel}
-        variant="outlined"
-        color="primary"
-        position={buttonPosition}
+      <CrudActionButton
+        size='small'
+        color={operation == 'edit' ? 'primary' : 'secondary'}
+        operation={operation}
         onClick={handleClickOpen}
-        />
+      />
 
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <Grid container>
@@ -67,7 +68,7 @@ export default function FormDialog({ buttonLabel, title, description, fields, di
             Cancel
           </Button>
           <Button onClick={handleClose} color="primary">
-            {dialogButtonLabel}
+            {operation}
           </Button>
         </DialogActions>
       </Dialog>

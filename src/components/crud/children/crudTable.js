@@ -12,7 +12,11 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import styles from '../styles.js';
 
-const CrudTable = ({title, data, ...props}) => {
+import CrudActionButton from '../children/crudActionButton'
+
+import ActionDialog from '../../dialog/dialogAction'
+
+const CrudTable = ({title, data, editActionTitle, editActionDescription, ...props}) => {
   const keys = Object.keys(data[0]);
   return (
     <TableContainer component={Paper}>
@@ -22,7 +26,7 @@ const CrudTable = ({title, data, ...props}) => {
             {keys.map((column) => (
               <TableCell style={styles.tableCell}> {column} </TableCell>
             ))}
-            <TableCell style={styles.actionTitle}> Accion </TableCell>
+            <TableCell style={styles.actionTitle}> Action </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -35,17 +39,16 @@ const CrudTable = ({title, data, ...props}) => {
                   })
                 }
                 <TableCell>
-                  <Fab
-                    style={styles.actionButton}
-                    size="small"
-                    color="primary"
-                    aria-label="edit"
-                  >
-                    <EditIcon />
-                  </Fab>
-                  <Fab style={styles.actionButton} size="small" color="secondary" aria-label="remove">
-                    <DeleteOutlineIcon/>
-                  </Fab>
+                  <ActionDialog
+                    title={editActionTitle}
+                    description={editActionDescription}
+                    fields={data[0]}
+                    operation='edit'
+                  />
+                  <CrudActionButton
+                    size='small'
+                    operation='delete'
+                  />
                 </TableCell>
               </TableRow>
             )
