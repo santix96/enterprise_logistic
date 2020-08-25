@@ -1,12 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+
+import NavSelector from './navSelector';
 import styles from './styles.js'
 
-const Navigation = () => {
+const Navigation = ({roleUser}) => {
   return (
     <AppBar style={styles.navBar} position="static">
       <Toolbar className="navBar">
@@ -14,14 +17,16 @@ const Navigation = () => {
         <Typography variant="h6" >
           Enterprise Logistic
         </Typography>
-        <Button href="/#inventario" style={styles.navButton}>Inventario</Button>
-        <Button href="/#" style={styles.navButton}>Pedidos</Button>
-        <Button href="/rutas" style={styles.navButton}>Rutas</Button>
-        <Button href="/transportadores" style={styles.navButton}>Transportadores</Button>
-        <Button href="/productos" style={styles.navButton}>Productos</Button>
+        <NavSelector navbarType={roleUser}/>
       </Toolbar>
     </AppBar>
   )
 }
 
-export default Navigation;
+const mapStateToProps = (userInfo) => {
+  return {
+      roleUser: userInfo.roleUser
+  }
+}
+
+export default connect(mapStateToProps)(Navigation);
