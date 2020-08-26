@@ -56,7 +56,7 @@ const Login = ({ roleUser, setRoleUser, resetUserState }) => {
   const userFake = {
     email: 'horus@gmail.com',
     password: '123456789',
-    role: 'ADMIN'
+    role: 'DISTRIBUTOR'
   }
 
   const [data, setData] = useState({
@@ -100,7 +100,7 @@ const Login = ({ roleUser, setRoleUser, resetUserState }) => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Correo Electronico"
             name="email"
             autoComplete="email"
             autoFocus
@@ -113,7 +113,7 @@ const Login = ({ roleUser, setRoleUser, resetUserState }) => {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Contraseña"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -122,7 +122,7 @@ const Login = ({ roleUser, setRoleUser, resetUserState }) => {
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            label="Recordarme"
           />
           <Button
             type="submit"
@@ -132,7 +132,7 @@ const Login = ({ roleUser, setRoleUser, resetUserState }) => {
             className={classes.submit}
             type='submit'
           >
-            Sign In
+            Iniciar Sesion
           </Button>
           <Grid container>
             <Grid item xs>
@@ -141,7 +141,7 @@ const Login = ({ roleUser, setRoleUser, resetUserState }) => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signup" variant="body2">
                 {"Crear cuenta"}
               </Link>
             </Grid>

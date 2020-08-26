@@ -7,12 +7,37 @@ import RoutesTransporters from '../routesTransporters';
 import RoutesProducts from '../routesProducts';
 import TransferList from '../assignRoutes';
 
+import SignupTypeSelector from '../signup/signupTypeSelector';
+import DistributorSignUp from '../signup/distributor';
+import ProviderSignUp from '../signup/provider';
+import ConveyorSignUp from '../signup/conveyor';
+
 const Routes = ({ roleUser }) => {
   return (
     <Switch>
           <Route path = '/login'
             exact component = {
               Login
+            }
+          />
+          <Route path = '/signup'
+            exact component = {
+              SignupTypeSelector
+            }
+          />
+          <Route path = '/signup/distribuidor'
+            exact component = {
+              DistributorSignUp
+            }
+          />
+        <Route path = '/signup/proveedor'
+            exact component = {
+              ProviderSignUp
+            }
+          />
+        <Route path = '/signup/transportador'
+            exact component = {
+              ConveyorSignUp
             }
           />
           <Route path = '/rutas'
@@ -43,6 +68,7 @@ const Routes = ({ roleUser }) => {
             - Crud Proveedores
             - Teminar Asignar rutas
           - General
+            - Signup selector
             - Signup de cada rol
           - Distribuidores
             - Comprar Productos
