@@ -10,7 +10,6 @@ const RESET_USER_STATE = 'RESET_USER_STATE';
 /**
  * Estado global del usuario, utilizando react-redux
  */
-
 const userLocalStorage = JSON.parse(localStorage.getItem('userState'));
 let initialUserState;
 
@@ -23,11 +22,7 @@ if (userLocalStorage !== null) {
     idUser: '',
     isLogged: false
   }
-  localStorage.setItem('userState',  {
-    roleUser: '',
-    idUser: '',
-    isLogged: false
-  });
+  localStorage.setItem('userState',  JSON.stringify(initialUserState));
 };
 
 /**
