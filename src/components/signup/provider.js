@@ -18,7 +18,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Enteprise Logistic
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -101,7 +101,7 @@ export default function ProviderSignUp() {
                 required
                 fullWidth
                 id="phone"
-                label="Numero de contacto"
+                label="Telefono"
                 name="phone"
                 autoComplete="phone"
               />

@@ -18,7 +18,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Enteprise Logistic
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -73,6 +73,30 @@ export default function ConveyorSignUp() {
                 autoFocus
               />
             </Grid>
+            <Grid item xs={12}>
+              <TextField
+                autoComplete="fname"
+                name="firstName"
+                variant="outlined"
+                required
+                fullWidth
+                id="firstName"
+                label="C.C"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                autoComplete="phone"
+                name="phone"
+                variant="outlined"
+                required
+                fullWidth
+                id="phone"
+                label="Telefono"
+                autoFocus
+              />
+            </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
@@ -103,7 +127,7 @@ export default function ConveyorSignUp() {
             color="primary"
             className={classes.submit}
           >
-            Registrarse
+            Solicitar Registro
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
