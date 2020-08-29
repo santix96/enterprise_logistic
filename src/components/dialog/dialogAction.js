@@ -10,6 +10,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import CrudActionButton from '../crud/children/crudActionButton.js'
+import { updateProduct } from '../../services/services'
 import CrudActionButtonStyle from '../crud/styles.js'
 import styles from './styles.js'
 
@@ -22,6 +23,11 @@ export default function FormActionDialog({ title, description, fields, operation
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+    updateProduct(e.target);
+  }
 
   return (
     <div>
@@ -48,34 +54,33 @@ export default function FormActionDialog({ title, description, fields, operation
           <DialogContentText>
             {description}
           </DialogContentText>
-          {
-
-            Object.entries(fields).map((field) => {
-              /* #TODO Recibir por props los campos que se desean bol */
-              const defaultDisabled = field[0] == "_id" || field[0] == "createdAt" || field[0] == "updatedAt" ;
-              return (
-                <TextField
-                  style={styles.fieldInput}
-                  autoFocus
-                  margin="dense"
-                  id={field}
-                  label={field[0]}
-                  type="text"
-                  fullWidth
-                  value={field[1]}
-                  disabled={defaultDisabled ? true : false }
-                />
-              )
-            })
-          }
-
-
+          <form style={{width: "450px"}} id='editForm' onSubmit={handleEdit}>
+            {
+              Object.entries(fields).map((field) => {
+                /* #TODO Recibir por props los campos que se desean bol */
+                const defaultDisabled = field[0] == "_id" || field[0] == "createdAt" || field[0] == "updatedAt" ;
+                return (
+                  <TextField
+                    style={styles.fieldInput}
+                    autoFocus
+                    margin="dense"
+                    id={field}
+                    label={field[0]}
+                    type="text"
+                    fullWidth
+                    defaultValue={field[1]}
+                    disabled={defaultDisabled ? true : false }
+                  />
+                )
+              })
+            }
+          </form>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button form="editForm" type="submit" color="primary">
             {operation}
           </Button>
         </DialogActions>

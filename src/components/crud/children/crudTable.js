@@ -14,6 +14,7 @@ import styles from '../styles.js';
 
 import CrudActionButton from '../children/crudActionButton'
 import ActionDialog from '../../dialog/dialogAction'
+import { deleteProduct } from '../../../services/services';
 
 const CrudTable = ({title, data, editActionTitle, editActionDescription, ...props}) => {
   const keys = Object.keys(data[0]);
@@ -32,7 +33,7 @@ const CrudTable = ({title, data, editActionTitle, editActionDescription, ...prop
         <TableBody>
           {data.map((item, index) => {
             return (
-              <TableRow align="center">
+              <TableRow align="center" >
                 {
                   Object.entries(item).map((key, rowIndex) => {
                     return (<TableCell>{ key[1] }</TableCell>)
@@ -48,6 +49,7 @@ const CrudTable = ({title, data, editActionTitle, editActionDescription, ...prop
                   <CrudActionButton
                     size='small'
                     operation='delete'
+                    item={item}
                   />
                 </TableCell>
               </TableRow>

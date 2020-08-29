@@ -19,6 +19,7 @@ const homeRouter = require('./routes/homeRoute')
 const routeRouter = require('./routes/routeRoute')
 const productRouter = require('./routes/productRoute')
 const cityRouter = require('./routes/cityRoute')
+const userRouter = require('./routes/userRoute')
 
 // Setup default port
 const PORT = process.env.PORT || 4000
@@ -47,9 +48,12 @@ app.use('/api', homeRouter)
 app.use('/ciudades', cityRouter)
 // app.use('/proveedores', providerRouter)
 // app.use('/distribuidores', distributorRouter)
+// app.use('/transportadores', conveyorRouter)
 // app.use('/ordenes', orderRouter)
+// app.use('/usuarios', userRouter)
 app.use('/products', productRouter)
 app.use('/routes', routeRouter)
+app.use('/users', userRouter)
 // app.use('/transacciones', transactiontRouter)
 // app.use('/zonas', zoneRouter)
 
@@ -63,6 +67,13 @@ app.use((err, req, res, next) => {
 connectDb().then(async () => {
   app.listen(PORT, function() {
     console.log(`Server is running on: ${PORT}`);
-    //seedInitialData();
+    /* Para limpiar las tablas */
+    // models.Provider.deleteMany({}, function (err) {});
+    // models.Product.deleteMany({}, function (err) {});
+    // models.City.deleteMany({}, function (err) {});
+    // console.log('Deleting tables data....');
+
+    /* Para poblar las tablas */
+    // seedInitialData();
   });
 });

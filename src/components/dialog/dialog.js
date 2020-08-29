@@ -10,10 +10,22 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import CrudButton from '../crud/children/crudButton.js'
+import { createProduct } from '../../services/services'
 import styles from './styles.js'
 
 export default function FormDialog({ buttonLabel, title, description, fields, dialogButtonLabel, buttonPosition }) {
   const [open, setOpen] = React.useState(false);
+  const [formData, setFormData] = React.useState({});
+
+  const handleCreate = () => {
+
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    createProduct(event.target);
+  }
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -21,6 +33,8 @@ export default function FormDialog({ buttonLabel, title, description, fields, di
   const handleClose = () => {
     setOpen(false);
   };
+
+
   return (
     <div>
       <CrudButton
@@ -29,7 +43,7 @@ export default function FormDialog({ buttonLabel, title, description, fields, di
         color="primary"
         position={buttonPosition}
         onClick={handleClickOpen}
-        />
+      />
 
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <Grid container>
@@ -47,25 +61,32 @@ export default function FormDialog({ buttonLabel, title, description, fields, di
           <DialogContentText>
             {description}
           </DialogContentText>
-          {
-            Object.keys(fields).map( (field) => (
-              <TextField
-                style={styles.fieldInput}
-                autoFocus
-                margin="dense"
-                id={field}
-                label={field}
-                type="text"
-                fullWidth
-              />
-            ))
-          }
+          <form style={{width: "450px"}} id='createForm' onSubmit={handleSubmit}>
+            {
+              Object.keys(fields).map( (field) =>{
+                const defaultDisabled = field == "_id" || field == "createdAt" || field == "updatedAt" ;
+                return (
+                    <TextField
+                      style={styles.fieldInput}
+                      autoFocus
+                      margin="dense"
+                      id={field}
+                      label={field}
+                      type="text"
+                      fullWidth
+                      value={formData.field}
+                      style={{display: defaultDisabled ? 'none' : 'block'}}
+                    />
+                );
+              })
+            }
+          </form>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button form='createForm' type="submit" color="primary">
             {dialogButtonLabel}
           </Button>
         </DialogActions>
