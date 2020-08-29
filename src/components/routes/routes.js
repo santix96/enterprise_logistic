@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Login from '../login';
 import RoutesCrud from '../routesCrud';
 import RoutesTransporters from '../routesTransporters';
@@ -15,11 +15,6 @@ import ConveyorSignUp from '../signup/conveyor';
 const Routes = ({ roleUser }) => {
   return (
     <Switch>
-          <Route path = '/login'
-            exact component = {
-              Login
-            }
-          />
           <Route path = '/signup'
             exact component = {
               SignupTypeSelector
@@ -60,6 +55,17 @@ const Routes = ({ roleUser }) => {
               RoutesProducts
             }
           />
+          {
+            roleUser == ''
+            ?
+            <Route path = '/login'
+              exact component = {
+                Login
+              }
+            />
+          :
+          <Redirect to="/productos" />
+          }
         /*
           Rutas Faltantes:
           - Admin

@@ -13,7 +13,7 @@ const Navigation = ({roleUser}) => {
   return (
     <AppBar style={styles.navBar} position="static">
       <Toolbar className="navBar">
-        <NavSelector navbarType={roleUser}/>
+        <NavSelector/>
       </Toolbar>
     </AppBar>
   )
