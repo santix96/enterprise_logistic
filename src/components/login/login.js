@@ -50,13 +50,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = ({ roleUser, setRoleUser, resetUserState }) => {
+const Login = ({ roleUser, setRoleUser }) => {
   const classes = useStyles();
 
   const userFake = {
     email: 'horus@gmail.com',
     password: '123456789',
-    role: 'DISTRIBUTOR'
+    role: 'ADMIN'
   }
 
   const [data, setData] = useState({
@@ -79,7 +79,7 @@ const Login = ({ roleUser, setRoleUser, resetUserState }) => {
         setRoleUser(userFake.role);
       }else{
         /* validar si el formato es correcto */
-        alert("WRONG USER OR PASSWORD");
+        alert("Usuario o Contraseña incorrectas");
       }
     }
 
@@ -125,7 +125,6 @@ const Login = ({ roleUser, setRoleUser, resetUserState }) => {
             label="Recordarme"
           />
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"

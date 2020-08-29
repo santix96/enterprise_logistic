@@ -16,19 +16,19 @@ import CrudButton from '../crud/children/crudButton';
 import { resetUserState } from '../../services/userSession'
 import styles from './styles.js'
 
-const NavSelector = ({navbarType, resetUserState, ...props}) => {
+const NavSelector = ({ roleUser, resetUserState, ...props }) => {
   const handleLogout = () => {
     resetUserState();
   }
 
-  if (navbarType == 'ADMIN') {
+  if (roleUser == 'ADMIN') {
     return(
       <>
         <SupervisedUserCircleIcon fontSize={"large"} style={styles.roleIcon} />
         <Typography variant="h6" >
           Enterprise Logistic
         </Typography>
-        <Button href="/#inventario" style={styles.navButton}>Inventario</Button>
+        <Button href="/inventario" style={styles.navButton}>Inventario</Button>
         <Button href="/asignar-rutas" style={styles.navButton}>Asignar Rutas</Button>
         <Button href="/#" style={styles.navButton}>Pedidos</Button>
         <Button href="/rutas" style={styles.navButton}>Rutas</Button>
@@ -38,7 +38,7 @@ const NavSelector = ({navbarType, resetUserState, ...props}) => {
       </>
     )
   }
-  else if(navbarType == 'PROVIDER'){
+  else if(roleUser == 'PROVIDER'){
     return(
       <>
         <BusinessCenterIcon fontSize={"large"} style={styles.roleIcon} />
@@ -51,7 +51,7 @@ const NavSelector = ({navbarType, resetUserState, ...props}) => {
       </>
     )
   }
-  else if(navbarType == 'DISTRIBUTOR'){
+  else if(roleUser == 'DISTRIBUTOR'){
     return(
       <>
         <AddShoppingCartIcon fontSize={"large"} style={styles.roleIcon} />
@@ -64,7 +64,7 @@ const NavSelector = ({navbarType, resetUserState, ...props}) => {
       </>
     )
   }
-  else if(navbarType == 'CONVEYOR'){
+  else if(roleUser == 'CONVEYOR'){
     return(
       <>
         <LocalShippingIcon fontSize={"large"} style={styles.roleIcon} />
@@ -95,4 +95,10 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null,mapDispatchToProps)(NavSelector);
+const mapStateToProps = (userInfo) => {
+  return {
+      roleUser: userInfo.roleUser
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(NavSelector);
