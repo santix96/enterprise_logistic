@@ -16,7 +16,7 @@ import CrudActionButton from '../children/crudActionButton'
 import ActionDialog from '../../dialog/dialogAction'
 import { deleteProduct } from '../../../services/services';
 
-const CrudTable = ({title, data, editActionTitle, editActionDescription, ...props}) => {
+const CrudTable = ({title, data, editActionTitle, editActionDescription, updateAction, deleteAction, ...props}) => {
   const keys = Object.keys(data[0]);
 
   return (
@@ -45,11 +45,13 @@ const CrudTable = ({title, data, editActionTitle, editActionDescription, ...prop
                     description={editActionDescription}
                     fields={item}
                     operation='edit'
+                    updateAction={updateAction}
                   />
                   <CrudActionButton
                     size='small'
                     operation='delete'
                     item={item}
+                    deleteAction={deleteAction}
                   />
                 </TableCell>
               </TableRow>

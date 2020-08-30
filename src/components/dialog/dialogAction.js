@@ -14,7 +14,7 @@ import { updateProduct } from '../../services/services'
 import CrudActionButtonStyle from '../crud/styles.js'
 import styles from './styles.js'
 
-export default function FormActionDialog({ title, description, fields, operation, disabledFields }) {
+export default function FormActionDialog({ title, description, fields, operation, disabledFields, updateAction }) {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,7 +26,7 @@ export default function FormActionDialog({ title, description, fields, operation
 
   const handleEdit = (e) => {
     e.preventDefault();
-    updateProduct(e.target);
+    updateAction(e.target);
   }
 
   return (

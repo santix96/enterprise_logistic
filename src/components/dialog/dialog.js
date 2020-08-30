@@ -10,16 +10,15 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import CrudButton from '../crud/children/crudButton.js'
-import { createProduct } from '../../services/services'
 import styles from './styles.js'
 
-export default function FormDialog({ buttonLabel, title, description, fields, dialogButtonLabel, buttonPosition }) {
+export default function FormDialog({ buttonLabel, title, description, fields, dialogButtonLabel, buttonPosition, action }) {
   const [open, setOpen] = React.useState(false);
   const [formData, setFormData] = React.useState({});
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createProduct(event.target);
+    action(event.target);
   }
 
   const handleClickOpen = () => {

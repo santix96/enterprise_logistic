@@ -5,7 +5,18 @@ import Typography from '@material-ui/core/Typography';
 import CrudTable from './children/crudTable.js';
 import Dialog from '../dialog'
 
-const Crud = ({label, data, dialogBtnLabel, buttonPosition, dialogDescription, dialogActionTitle, dialogActionDescription}) => {
+const Crud = ({
+  label,
+  data,
+  dialogBtnLabel,
+  buttonPosition,
+  dialogDescription,
+  dialogActionTitle,
+  dialogActionDescription,
+  createAction,
+  updateAction,
+  deleteAction
+}) => {
   return (
       <Container>
         <Grid container spacing={3}>
@@ -20,6 +31,8 @@ const Crud = ({label, data, dialogBtnLabel, buttonPosition, dialogDescription, d
               data={data}
               editActionTitle={dialogActionTitle}
               editActionDescription={dialogActionDescription}
+              updateAction={updateAction}
+              deleteAction={deleteAction}
             />
           </Grid>
           <Grid item xs>
@@ -30,6 +43,7 @@ const Crud = ({label, data, dialogBtnLabel, buttonPosition, dialogDescription, d
               dialogButtonLabel="Crear"
               title={"Create"}
               fields={data[0]}
+              action={createAction}
             />
           </Grid>
         </Grid>

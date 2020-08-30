@@ -6,7 +6,7 @@ import { deleteProduct } from '../../../services/services';
 
 import style from '../styles.js';
 
-const CrudActionButton = ({size, operation, item, ...props}) => {
+const CrudActionButton = ({size, operation, item, updateAction, deleteAction, ...props}) => {
   const handleClick = () => {
     if (props.onClick) {
       props.onClick(props.value);
@@ -14,7 +14,7 @@ const CrudActionButton = ({size, operation, item, ...props}) => {
   }
 
   const handleDelete = () => {
-    deleteProduct(item);
+    deleteAction(item);
   }
 
   return(
