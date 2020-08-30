@@ -5,7 +5,6 @@ import Login from '../login';
 import RoutesCrud from '../routesCrud';
 import RoutesTransporters from '../routesTransporters';
 import RoutesProducts from '../routesProducts';
-import TransferList from '../assignRoutes';
 
 import SignupTypeSelector from '../signup/signupTypeSelector';
 import DistributorSignUp from '../signup/distributor';
@@ -38,11 +37,6 @@ const Routes = ({ roleUser }) => {
           <Route path = '/rutas'
             exact component = {
               RoutesCrud
-            }
-          />
-          <Route path = '/asignar-rutas'
-            exact component = {
-              TransferList
             }
           />
           <Route path = '/transportadores'
