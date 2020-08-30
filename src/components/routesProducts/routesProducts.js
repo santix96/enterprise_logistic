@@ -5,6 +5,8 @@ import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import {
   getProducts
 } from '../../services/services.js'
+
+import { createProduct, updateProduct, deleteProduct } from '../../services/services'
 import axios from 'axios';
 
 const RoutesProducts = () => {
@@ -25,6 +27,9 @@ const RoutesProducts = () => {
       dialogDescription={"Descripcion de prueba"}
       dialogActionTitle={"Editar Producto"}
       dialogActionDescription={"Descripcion ..."}
+      createAction={createProduct}
+      updateAction={updateProduct}
+      deleteAction={deleteProduct}
     />
   );
 }
