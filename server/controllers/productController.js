@@ -31,12 +31,12 @@ let ProductController = {
     await product.save()
     .then(data => {
       res.send(data);
+      console.log("Product created ...")
     });
   },
   Delete: async (req, res) => {
-    console.log("BODY ON DELETE", req.body);
-    /* Validar si existe en la BD algun producto con ese id sino capturar error. */
     await models.Product.deleteOne({_id: req.body._id})
+    console.log("Product deleted ...")
   },
   Update: async (req, res) => {
     await models.Product.findOneAndUpdate(

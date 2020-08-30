@@ -17,10 +17,6 @@ export default function FormDialog({ buttonLabel, title, description, fields, di
   const [open, setOpen] = React.useState(false);
   const [formData, setFormData] = React.useState({});
 
-  const handleCreate = () => {
-
-  }
-
   const handleSubmit = (event) => {
     event.preventDefault();
     createProduct(event.target);
@@ -33,7 +29,6 @@ export default function FormDialog({ buttonLabel, title, description, fields, di
   const handleClose = () => {
     setOpen(false);
   };
-
 
   return (
     <div>
