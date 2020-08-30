@@ -27,19 +27,19 @@ const seedInitialData = async () => {
   const provider1 = new models.Provider({
     name: 'Alpina',
     nit: "123456789",
-    encharged: "Homero Simpson",
+    inCharge: "Homero Simpson",
   });
 
   const provider2 = new models.Provider({
     name: 'Margarita',
     nit: "987654321",
-    encharged: "Horus",
+    inCharge: "Horus",
   });
 
   const provider3 = new models.Provider({
     name: 'Super',
     nit: "789123456",
-    encharged: "Avatar",
+    inCharge: "Avatar",
   });
 
   /* Agregar Productos */
@@ -108,6 +108,26 @@ const seedInitialData = async () => {
   /* Agregar Zonas */
 
   /* Agregar Rutas */
+  const route1 = new models.Route({
+    zone: '5f38f4f36a382c99fe1c0290',
+    type: "MONOMARCA",
+    label: "RUTA NORTE - 1"
+  });
+  const route2 = new models.Route({
+    zone: '5f38f4f36a382c99fe1c0290',
+    type: "MONOMARCA",
+    label: "RUTA SUR - 1"
+  });
+  const route3 = new models.Route({
+    zone: '5f38f4f36a382c99fe1c0290',
+    type: "MULTIMARCA",
+    label: "RUTA NORTE - 2"
+  });
+  const route4 = new models.Route({
+    zone: '5f38f4f36a382c99fe1c0290',
+    type: "MONOMARCA",
+    label: "RUTA ESPECIAL - CELEMA"
+  });
 
   /* Agregar Ordenes */
 
@@ -123,10 +143,24 @@ const seedInitialData = async () => {
   await product5.save();
 
   await city1.save();
+
+  await route1.save();
+  await route2.save();
+  await route3.save();
+  await route4.save();
+
 };
 
+const cleanDatabase = async () => {
+  models.Provider.collection.drop();
+  models.Product.collection.drop();
+  models.City.collection.drop();
+  models.Route.collection.drop();
+
+  console.log('Deleting tables data....');
+}
 const models = { City, Conveyor, Distributor, Inventory, Neighborhood, Order, Product, Provider, Route, Transaction, Zone };
 
-export { connectDb, seedInitialData };
+export { connectDb, seedInitialData, cleanDatabase };
 
 export default models;
