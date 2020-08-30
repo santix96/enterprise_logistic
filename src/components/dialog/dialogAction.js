@@ -9,19 +9,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import CrudButton from '../crud/children/crudButton.js'
-import { createProduct } from '../../services/services'
+import CrudActionButton from '../crud/children/crudActionButton.js'
+import { updateProduct } from '../../services/services'
+import CrudActionButtonStyle from '../crud/styles.js'
 import styles from './styles.js'
 
-export default function FormDialog({ buttonLabel, title, description, fields, dialogButtonLabel, buttonPosition }) {
+export default function FormActionDialog({ title, description, fields, operation, disabledFields }) {
   const [open, setOpen] = React.useState(false);
-  const [formData, setFormData] = React.useState({});
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    createProduct(event.target);
-  }
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -30,13 +24,17 @@ export default function FormDialog({ buttonLabel, title, description, fields, di
     setOpen(false);
   };
 
+  const handleEdit = (e) => {
+    e.preventDefault();
+    updateProduct(e.target);
+  }
+
   return (
     <div>
-      <CrudButton
-        label={buttonLabel}
-        variant="outlined"
-        color="primary"
-        position={buttonPosition}
+      <CrudActionButton
+        size='small'
+        color={operation == 'edit' ? 'primary' : 'secondary'}
+        operation={operation}
         onClick={handleClickOpen}
       />
 
@@ -56,23 +54,24 @@ export default function FormDialog({ buttonLabel, title, description, fields, di
           <DialogContentText>
             {description}
           </DialogContentText>
-          <form style={{width: "450px"}} id='createForm' onSubmit={handleSubmit}>
+          <form style={{width: "450px"}} id='editForm' onSubmit={handleEdit}>
             {
-              Object.keys(fields).map( (field) =>{
-                const defaultDisabled = field == "_id" || field == "createdAt" || field == "updatedAt" ;
+              Object.entries(fields).map((field) => {
+                /* #TODO Recibir por props los campos que se desean bol */
+                const defaultDisabled = field[0] == "_id" || field[0] == "createdAt" || field[0] == "updatedAt" ;
                 return (
-                    <TextField
-                      style={styles.fieldInput}
-                      autoFocus
-                      margin="dense"
-                      id={field}
-                      label={field}
-                      type="text"
-                      fullWidth
-                      value={formData.field}
-                      style={{display: defaultDisabled ? 'none' : 'block'}}
-                    />
-                );
+                  <TextField
+                    style={styles.fieldInput}
+                    autoFocus
+                    margin="dense"
+                    id={field}
+                    label={field[0]}
+                    type="text"
+                    fullWidth
+                    defaultValue={field[1]}
+                    disabled={defaultDisabled ? true : false }
+                  />
+                )
               })
             }
           </form>
@@ -81,8 +80,8 @@ export default function FormDialog({ buttonLabel, title, description, fields, di
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button form='createForm' type="submit" color="primary">
-            {dialogButtonLabel}
+          <Button form="editForm" type="submit" color="primary">
+            {operation}
           </Button>
         </DialogActions>
       </Dialog>

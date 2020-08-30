@@ -12,8 +12,13 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import styles from '../styles.js';
 
-const CrudTable = ({title, data, ...props}) => {
+import CrudActionButton from '../children/crudActionButton'
+import ActionDialog from '../../dialog/dialogAction'
+import { deleteProduct } from '../../../services/services';
+
+const CrudTable = ({title, data, editActionTitle, editActionDescription, ...props}) => {
   const keys = Object.keys(data[0]);
+
   return (
     <TableContainer component={Paper}>
       <Table stickyHeader aria-label="sticky table">
@@ -22,30 +27,30 @@ const CrudTable = ({title, data, ...props}) => {
             {keys.map((column) => (
               <TableCell style={styles.tableCell}> {column} </TableCell>
             ))}
-            <TableCell style={styles.actionTitle}> Accion </TableCell>
+            <TableCell style={styles.actionTitle}> Action </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {data.map((item, index) => {
             return (
-              <TableRow align="center" key={item.id}>
+              <TableRow align="center" >
                 {
-                  Object.entries(item).map((key) => {
+                  Object.entries(item).map((key, rowIndex) => {
                     return (<TableCell>{ key[1] }</TableCell>)
                   })
                 }
                 <TableCell>
-                  <Fab
-                    style={styles.actionButton}
-                    size="small"
-                    color="primary"
-                    aria-label="edit"
-                  >
-                    <EditIcon />
-                  </Fab>
-                  <Fab style={styles.actionButton} size="small" color="secondary" aria-label="remove">
-                    <DeleteOutlineIcon/>
-                  </Fab>
+                  <ActionDialog
+                    title={editActionTitle}
+                    description={editActionDescription}
+                    fields={item}
+                    operation='edit'
+                  />
+                  <CrudActionButton
+                    size='small'
+                    operation='delete'
+                    item={item}
+                  />
                 </TableCell>
               </TableRow>
             )

@@ -9,7 +9,6 @@ import axios from 'axios';
 
 const RoutesProducts = () => {
   const [data, setData] = useState([{"status": "NO DATA"}])
-  const url = 'http://localhost:4000/products/all'
 
   useEffect( async () => {
     let responseData = await getProducts();
@@ -18,21 +17,14 @@ const RoutesProducts = () => {
   }, [])
 
   return (
-    <Crud label = {
-      "Productos"
-    }
-    data = {
-      data
-    }
-    buttonPosition = {
-      "center"
-    }
-    dialogBtnLabel = {
-      "Agregar"
-    }
-    dialogDescription = {
-      "Descripcion de prueba"
-    }
+    <Crud
+      label={"Productos"}
+      data={data}
+      buttonPosition={"right"}
+      dialogBtnLabel={"Agregar"}
+      dialogDescription={"Descripcion de prueba"}
+      dialogActionTitle={"Editar Producto"}
+      dialogActionDescription={"Descripcion ..."}
     />
   );
 }
