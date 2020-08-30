@@ -1,7 +1,7 @@
 // Import models
 import
 models, {
-  connectDb, seedInitialData
+  connectDb, seedInitialData, cleanDatabase
 } from './models';
 
 // Import express framework
@@ -68,12 +68,9 @@ connectDb().then(async () => {
   app.listen(PORT, function() {
     console.log(`Server is running on: ${PORT}`);
     /* Para limpiar las tablas */
-    // models.Provider.deleteMany({}, function (err) {});
-    // models.Product.deleteMany({}, function (err) {});
-    // models.City.deleteMany({}, function (err) {});
-    // console.log('Deleting tables data....');
+    cleanDatabase();
 
     /* Para poblar las tablas */
-    // seedInitialData();
+    seedInitialData();
   });
 });

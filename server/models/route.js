@@ -8,11 +8,14 @@ const routeSchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      unique: true,
+      required: true,
+    },
+    label: {
+      type: String,
       required: true,
     }
   },
-  { timestamps: true },
+  { timestamps: true, versionKey: false  },
 );
 
 const Route = mongoose.model('Route', routeSchema);

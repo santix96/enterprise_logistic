@@ -14,16 +14,17 @@ import ConveyorSignUp from '../signup/conveyor';
 const Routes = ({ roleUser }) => {
   return (
     <Switch>
-          <Route path = '/signup'
-            exact component = {
-              SignupTypeSelector
-            }
-          />
-          <Route path = '/signup/distribuidor'
-            exact component = {
-              DistributorSignUp
-            }
-          />
+        /* Rutas registro */
+        <Route path = '/signup'
+          exact component = {
+            SignupTypeSelector
+          }
+        />
+        <Route path = '/signup/distribuidor'
+          exact component = {
+            DistributorSignUp
+          }
+        />
         <Route path = '/signup/proveedor'
             exact component = {
               ProviderSignUp
@@ -34,32 +35,34 @@ const Routes = ({ roleUser }) => {
               ConveyorSignUp
             }
           />
-          <Route path = '/rutas'
-            exact component = {
-              RoutesCrud
-            }
-          />
-          <Route path = '/transportadores'
-            exact component = {
-              RoutesTransporters
-            }
-          />
-          <Route path = '/productos'
-            exact component = {
-              RoutesProducts
-            }
-          />
-          {
-            roleUser == ''
-            ?
-            <Route path = '/login'
-              exact component = {
-                Login
-              }
-            />
-          :
-          <Redirect to="/productos" />
+
+        /* Rutas Admin */
+        <Route path = '/rutas'
+          exact component = {
+            RoutesCrud
           }
+        />
+        <Route path = '/transportadores'
+          exact component = {
+            RoutesTransporters
+          }
+        />
+        <Route path = '/productos'
+          exact component = {
+            RoutesProducts
+          }
+        />
+        {
+          roleUser == ''
+          ?
+          <Route path = '/login'
+            exact component = {
+              Login
+            }
+          />
+          :
+          <Redirect to="/home" />
+        }
         /*
           Rutas Faltantes:
           - Admin

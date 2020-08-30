@@ -8,8 +8,9 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     provider: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Provider'
+      type: String,
+      unique: false,
+      required: true,
     },
     buyPrice: {
       type: Number,
