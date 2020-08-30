@@ -7,10 +7,9 @@ const conveyorSchema = new mongoose.Schema(
       unique: true,
       required: true,
     },
-    uniqueId: {
-      type: String,
-      unique: true,
-      required: true,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
     },
     neighborhood: {
       type: mongoose.Schema.Types.ObjectId,

@@ -12,6 +12,10 @@ const distributorSchema = new mongoose.Schema(
       unique: true,
       required: true,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    },
     zone: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Zone'

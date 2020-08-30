@@ -25,7 +25,7 @@ const seedInitialData = async () => {
 
   /* Agregar Proveedores */
   const provider1 = new models.Provider({
-    name: '5f38f4f36a382c99fe1c028f',
+    name: 'Alpina',
     nit: "123456789",
     encharged: "Homero Simpson",
   });
@@ -37,7 +37,7 @@ const seedInitialData = async () => {
   });
 
   const provider3 = new models.Provider({
-    name: '5f38f4f36a382c99fe1c0291',
+    name: 'Super',
     nit: "789123456",
     encharged: "Avatar",
   });
@@ -45,7 +45,7 @@ const seedInitialData = async () => {
   /* Agregar Productos */
   const product1 = new models.Product({
     name: 'Leche',
-    provider: '5f38f4f36a382c99fe1c028f',
+    provider: '5f47a5ac82ec272cc3ee592a',
     buyPrice: 1000,
     weigh: 1000,
     weighUnit: "ML"
@@ -61,7 +61,7 @@ const seedInitialData = async () => {
 
   const product3 = new models.Product({
     name: 'Yogourt Melocotón',
-    provider: '5f38f4f36a382c99fe1c0291',
+    provider: '5f47a5ac82ec272cc3ee592a',
     buyPrice: 2100,
     weigh: 1500,
     weighUnit: "ML"
@@ -69,7 +69,7 @@ const seedInitialData = async () => {
 
   const product4 = new models.Product({
     name: 'Yogourt Fresa',
-    provider: '5f38f4f36a382c99fe1c0291',
+    provider: '5f47a5ac82ec272cc3ee592a',
     buyPrice: 2100,
     weigh: 1500,
     weighUnit: "ML"
