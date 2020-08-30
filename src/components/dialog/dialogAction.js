@@ -13,8 +13,10 @@ import CrudActionButton from '../crud/children/crudActionButton.js'
 import { updateProduct } from '../../services/services'
 import CrudActionButtonStyle from '../crud/styles.js'
 import styles from './styles.js'
+import { useLocation } from 'react-router-dom';
 
 export default function FormActionDialog({ title, description, fields, operation, disabledFields, updateAction }) {
+  let location = useLocation();
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,6 +29,7 @@ export default function FormActionDialog({ title, description, fields, operation
   const handleEdit = (e) => {
     e.preventDefault();
     updateAction(e.target);
+    window.location.href = ''+location.pathname;
   }
 
   return (

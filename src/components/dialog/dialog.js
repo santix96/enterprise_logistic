@@ -8,17 +8,20 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { useLocation } from 'react-router-dom';
 
 import CrudButton from '../crud/children/crudButton.js'
 import styles from './styles.js'
 
 export default function FormDialog({ buttonLabel, title, description, fields, dialogButtonLabel, buttonPosition, action }) {
+    let location = useLocation();
   const [open, setOpen] = React.useState(false);
   const [formData, setFormData] = React.useState({});
 
   const handleSubmit = (event) => {
     event.preventDefault();
     action(event.target);
+    window.location.href = ''+location.pathname;
   }
 
   const handleClickOpen = () => {
