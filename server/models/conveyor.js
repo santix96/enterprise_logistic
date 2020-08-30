@@ -4,7 +4,6 @@ const conveyorSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      unique: true,
       required: true,
     },
     user: {
@@ -20,7 +19,7 @@ const conveyorSchema = new mongoose.Schema(
       ref: 'Route'
     },
   },
-  { timestamps: true },
+  { timestamps: true, versionKey: false  },
 );
 
 const Conveyor = mongoose.model('Conveyor', conveyorSchema);

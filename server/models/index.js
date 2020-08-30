@@ -129,6 +129,21 @@ const seedInitialData = async () => {
     label: "RUTA ESPECIAL - CELEMA"
   });
 
+  /* Agregar Transportadores */
+  const conveyor1 = new models.Conveyor({
+    name: 'Hernan Orjuela',
+    user: "5f38f4f36a382c99fe1c0210",
+    neighborhood: "5f38f4f36a382c99fe1c0250",
+    route: "5f38f4f36a382c99fe1c0290"
+  });
+
+  const conveyor2 = new models.Conveyor({
+    name: 'Juan Molina',
+    user: "5f38f4f36a382c99fe1c0210",
+    neighborhood: "5f38f4f36a382c99fe1c0250",
+    route: "5f38f4f36a382c99fe1c0290"
+  });
+
   /* Agregar Ordenes */
 
 
@@ -149,6 +164,9 @@ const seedInitialData = async () => {
   await route3.save();
   await route4.save();
 
+  await conveyor1.save();
+  await conveyor2.save();
+
 };
 
 const cleanDatabase = async () => {
@@ -156,6 +174,7 @@ const cleanDatabase = async () => {
   models.Product.collection.drop();
   models.City.collection.drop();
   models.Route.collection.drop();
+  models.Conveyor.collection.drop();
 
   console.log('Deleting tables data....');
 }

@@ -20,6 +20,7 @@ const routeRouter = require('./routes/routeRoute')
 const productRouter = require('./routes/productRoute')
 const cityRouter = require('./routes/cityRoute')
 const userRouter = require('./routes/userRoute')
+const conveyorRouter = require('./routes/conveyorRoute')
 
 // Setup default port
 const PORT = process.env.PORT || 4000
@@ -48,7 +49,7 @@ app.use('/api', homeRouter)
 app.use('/ciudades', cityRouter)
 // app.use('/proveedores', providerRouter)
 // app.use('/distribuidores', distributorRouter)
-// app.use('/transportadores', conveyorRouter)
+app.use('/conveyors', conveyorRouter)
 // app.use('/ordenes', orderRouter)
 // app.use('/usuarios', userRouter)
 app.use('/products', productRouter)

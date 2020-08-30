@@ -3,6 +3,8 @@ import { getProducts, getProduct, createProduct, deleteProduct, updateProduct } 
 
 import { getRoutes, getRoute, createRoute, updateRoute, deleteRoute } from './componentServices/routes';
 
+import { getConveyors, getConveyor, createConveyor, deleteConveyor, updateConveyor } from './componentServices/conveyors';
+
 export {
   getProducts,
   getProduct,
@@ -13,5 +15,10 @@ export {
   getRoute,
   createRoute,
   updateRoute,
-  deleteRoute
+  deleteRoute,
+  getConveyors,
+  getConveyor,
+  createConveyor,
+  deleteConveyor,
+  updateConveyor
 };

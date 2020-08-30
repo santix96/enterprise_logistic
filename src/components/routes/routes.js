@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Login from '../login';
 import RoutesCrud from '../routesCrud';
-import RoutesTransporters from '../routesTransporters';
+import RoutesConveyors from '../routesConveyors';
 import RoutesProducts from '../routesProducts';
 
 import SignupTypeSelector from '../signup/signupTypeSelector';
@@ -44,7 +44,7 @@ const Routes = ({ roleUser }) => {
         />
         <Route path = '/transportadores'
           exact component = {
-            RoutesTransporters
+            RoutesConveyors
           }
         />
         <Route path = '/productos'
