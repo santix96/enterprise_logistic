@@ -21,6 +21,9 @@ const productRouter = require('./routes/productRoute')
 const cityRouter = require('./routes/cityRoute')
 const userRouter = require('./routes/userRoute')
 const conveyorRouter = require('./routes/conveyorRoute')
+const distributorRouter = require('./routes/distributorRoute')
+const providerRouter = require('./routes/providerRoute')
+const orderRouter = require('./routes/orderRoute')
 
 // Setup default port
 const PORT = process.env.PORT || 4000
@@ -47,10 +50,10 @@ if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
 }
 app.use('/api', homeRouter)
 app.use('/ciudades', cityRouter)
-// app.use('/proveedores', providerRouter)
-// app.use('/distribuidores', distributorRouter)
+app.use('/providers', providerRouter)
+app.use('/distributors', distributorRouter)
 app.use('/conveyors', conveyorRouter)
-// app.use('/ordenes', orderRouter)
+app.use('/orders', orderRouter)
 // app.use('/usuarios', userRouter)
 app.use('/products', productRouter)
 app.use('/routes', routeRouter)
@@ -69,7 +72,7 @@ connectDb().then(async () => {
   app.listen(PORT, function() {
     console.log(`Server is running on: ${PORT}`);
     /* Para limpiar las tablas */
-    cleanDatabase();
+    //cleanDatabase();
 
     /* Para poblar las tablas */
     seedInitialData();

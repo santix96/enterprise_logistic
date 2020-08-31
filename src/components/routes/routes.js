@@ -7,6 +7,7 @@ import RoutesConveyors from '../routesConveyors';
 import RoutesProducts from '../routesProducts';
 import RoutesOrders from '../orders/routesOrders';
 import RoutesDistributors from '../routesDitributors';
+import RoutesProviders from '../routesProviders';
 
 import SignupTypeSelector from '../signup/signupTypeSelector';
 import DistributorSignUp from '../signup/distributor';
@@ -57,10 +58,15 @@ const Routes = ({ roleUser }) => {
           }
         />
       <Route path = '/distribuidores'
-          exact component = {
-            RoutesDistributors
-          }
-        />
+        exact component = {
+          RoutesDistributors
+        }
+      />
+    <Route path = '/proveedores'
+        exact component = {
+          RoutesProviders
+        }
+      />
       <Route path = '/productos'
         exact component = {
           RoutesProducts

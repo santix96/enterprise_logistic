@@ -34,6 +34,7 @@ const NavSelector = ({ roleUser, resetUserState, ...props }) => {
         <Button href="/rutas" style={styles.navButton}>Rutas</Button>
         <Button href="/transportadores" style={styles.navButton}>Transportadores</Button>
         <Button href="/distribuidores" style={styles.navButton}>Distribuidores</Button>
+        <Button href="/proveedores" style={styles.navButton}>Proveedores</Button>
         <Button href="/productos" style={styles.navButton}>Productos</Button>
         <Button href="/login" style={styles.navButton} onClick={handleLogout}>Logout</Button>
       </>
