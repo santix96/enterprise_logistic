@@ -30,9 +30,10 @@ const NavSelector = ({ roleUser, resetUserState, ...props }) => {
         </Typography>
         <Button href="/inventario" style={styles.navButton}>Inventario</Button>
         <Button href="/asignar-rutas" style={styles.navButton}>Asignar Rutas</Button>
-        <Button href="/#" style={styles.navButton}>Pedidos</Button>
+        <Button href="/pedidos" style={styles.navButton}>Pedidos</Button>
         <Button href="/rutas" style={styles.navButton}>Rutas</Button>
         <Button href="/transportadores" style={styles.navButton}>Transportadores</Button>
+        <Button href="/distribuidores" style={styles.navButton}>Distribuidores</Button>
         <Button href="/productos" style={styles.navButton}>Productos</Button>
         <Button href="/login" style={styles.navButton} onClick={handleLogout}>Logout</Button>
       </>

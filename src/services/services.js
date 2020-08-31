@@ -5,6 +5,10 @@ import { getRoutes, getRoute, createRoute, updateRoute, deleteRoute } from './co
 
 import { getConveyors, getConveyor, createConveyor, deleteConveyor, updateConveyor } from './componentServices/conveyors';
 
+import { getOrders, getOrder, createOrder, deleteOrder, updateOrder } from './componentServices/orders';
+
+import { getDistributors, getDistributor, createDistributor, deleteDistributor, updateDistributor } from './componentServices/distributors';
+
 export {
   getProducts,
   getProduct,
@@ -20,5 +24,15 @@ export {
   getConveyor,
   createConveyor,
   deleteConveyor,
-  updateConveyor
+  updateConveyor,
+  getOrders,
+  getOrder,
+  createOrder,
+  deleteOrder,
+  updateOrder,
+  getDistributors,
+  getDistributor,
+  createDistributor,
+  deleteDistributor,
+  updateDistributor
 };

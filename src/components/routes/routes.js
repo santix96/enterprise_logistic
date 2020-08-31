@@ -5,11 +5,15 @@ import Login from '../login';
 import RoutesCrud from '../routesCrud';
 import RoutesConveyors from '../routesConveyors';
 import RoutesProducts from '../routesProducts';
+import RoutesOrders from '../orders/routesOrders';
+import RoutesDistributors from '../routesDitributors';
 
 import SignupTypeSelector from '../signup/signupTypeSelector';
 import DistributorSignUp from '../signup/distributor';
 import ProviderSignUp from '../signup/provider';
 import ConveyorSignUp from '../signup/conveyor';
+
+import AssignRoutes from '../assignRoutes/assignRoutes';
 
 const Routes = ({ roleUser }) => {
   return (
@@ -42,14 +46,29 @@ const Routes = ({ roleUser }) => {
             RoutesCrud
           }
         />
+      <Route path = '/pedidos'
+          exact component = {
+            RoutesOrders
+          }
+        />
         <Route path = '/transportadores'
           exact component = {
             RoutesConveyors
           }
         />
-        <Route path = '/productos'
+      <Route path = '/distribuidores'
           exact component = {
-            RoutesProducts
+            RoutesDistributors
+          }
+        />
+      <Route path = '/productos'
+        exact component = {
+          RoutesProducts
+        }
+      />
+      <Route path = '/asignar-rutas'
+          exact component = {
+            AssignRoutes
           }
         />
         {
