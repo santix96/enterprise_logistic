@@ -35,16 +35,20 @@ const createConveyor = async (target) => {
 }
 
 const deleteConveyor = async (item) => {
-   fetch(url + item._id, {
-    method: 'DELETE',
-    body: JSON.stringify(item),
-    headers: {
-        "Content-type": "application/json; charset=UTF-8"
-    }
-  })
-  .catch(error => console.error('Error:', error))
-  .then(res => res.text()) // or res.json()
-  .then(res => console.log("Conveyor deleted..", res))
+  if (window.confirm('¿Esta seguro que desea eliminar este producto?')) {
+    fetch(url + item._id, {
+      method: 'DELETE',
+      body: JSON.stringify(item),
+      headers: {
+         "Content-type": "application/json; charset=UTF-8"
+      }
+   })
+   .catch(error => console.error('Error:', error))
+   .then(res => res.text()) // or res.json()
+   .then(res => console.log("Conveyor deleted..", res))
+  } else {
+    this.onCancel(item)
+  }
 }
 
 const updateConveyor = (target) => {

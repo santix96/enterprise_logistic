@@ -36,16 +36,20 @@ const createProduct = async (target) => {
 }
 
 const deleteProduct = async (item) => {
-   fetch(url + item._id, {
-    method: 'DELETE',
-    body: JSON.stringify(item),
-    headers: {
-        "Content-type": "application/json; charset=UTF-8"
-    }
-  })
-  .catch(error => console.error('Error:', error))
-  .then(res => res.text()) // or res.json()
-  .then(res => console.log("Product deleted..", res))
+  if (window.confirm('¿Esta seguro que desea eliminar este producto?')) {
+    fetch(url + item._id, {
+      method: 'DELETE',
+      body: JSON.stringify(item),
+      headers: {
+         "Content-type": "application/json; charset=UTF-8"
+      }
+   })
+   .catch(error => console.error('Error:', error))
+   .then(res => res.text()) // or res.json()
+   .then(res => console.log("Product deleted..", res))
+  } else {
+    this.onCancel(item)
+  }
 }
 
 const updateProduct = (target) => {

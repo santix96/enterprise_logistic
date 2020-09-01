@@ -35,15 +35,20 @@ const createProvider = async (target) => {
 }
 
 const deleteProvider = async (item) => {
-   fetch(url + item._id, {
-    method: 'DELETE',
-    body: JSON.stringify(item),
-    headers: {
-        "Content-type": "application/json; charset=UTF-8"
-    }
-  })
-  .catch(error => console.error('Error:', error))
-  .then(res => res.text()) // or res.json()
+  if (window.confirm('¿Esta seguro que desea eliminar este producto?')) {
+    fetch(url + item._id, {
+      method: 'DELETE',
+      body: JSON.stringify(item),
+      headers: {
+         "Content-type": "application/json; charset=UTF-8"
+      }
+   })
+   .catch(error => console.error('Error:', error))
+   .then(res => res.text()) // or res.json()
+   .then(res => console.log("Provider deleted..", res))
+  } else {
+    this.onCancel(item)
+  }
 }
 
 const updateProvider = (target) => {
