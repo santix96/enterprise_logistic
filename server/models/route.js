@@ -12,6 +12,7 @@ const routeSchema = new mongoose.Schema(
     },
     label: {
       type: String,
+      unique: true,
       required: true,
     }
   },

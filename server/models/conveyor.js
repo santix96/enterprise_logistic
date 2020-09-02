@@ -10,9 +10,13 @@ const conveyorSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     },
-    neighborhood: {
+    neighborhood:  {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Neighborhood'
+    },
+    zone: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Zone'
     },
     route: {
       type: mongoose.Schema.Types.ObjectId,

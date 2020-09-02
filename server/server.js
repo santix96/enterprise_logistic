@@ -24,6 +24,8 @@ const conveyorRouter = require('./routes/conveyorRoute')
 const distributorRouter = require('./routes/distributorRoute')
 const providerRouter = require('./routes/providerRoute')
 const orderRouter = require('./routes/orderRoute')
+const zoneRouter = require('./routes/zoneRoute')
+const neighborhoodRouter = require('./routes/neighborhoodRoute')
 
 // Setup default port
 const PORT = process.env.PORT || 4000
@@ -49,17 +51,17 @@ if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
   })
 }
 app.use('/api', homeRouter)
-app.use('/ciudades', cityRouter)
+app.use('/cities', cityRouter)
 app.use('/providers', providerRouter)
 app.use('/distributors', distributorRouter)
 app.use('/conveyors', conveyorRouter)
 app.use('/orders', orderRouter)
-// app.use('/usuarios', userRouter)
+app.use('/users', userRouter)
 app.use('/products', productRouter)
 app.use('/routes', routeRouter)
 app.use('/users', userRouter)
-// app.use('/transacciones', transactiontRouter)
-// app.use('/zonas', zoneRouter)
+app.use('/neighborhoods', neighborhoodRouter)
+app.use('/zones', zoneRouter)
 
 // Implement route for errors
 app.use((err, req, res, next) => {
