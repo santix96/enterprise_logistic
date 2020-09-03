@@ -5,6 +5,7 @@ const UserController = require('./../controllers/userController.js');
 // Create express router
 const router = express.Router();
 
-//router.get('/', auth, UserController.ValidateUser);
+router.get('/', UserController.GetAll)
+router.get('/:id', UserController.Get)
 // Export router
 module.exports = router

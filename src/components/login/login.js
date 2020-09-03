@@ -16,6 +16,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import { setRoleUser, resetUserState, getRoleUser } from '../../services/userSession'
+import { getUserByEmail } from '../../services/services'
+
 
 function Copyright() {
   return (
@@ -53,10 +55,16 @@ const useStyles = makeStyles((theme) => ({
 const Login = ({ roleUser, setRoleUser }) => {
   const classes = useStyles();
 
-  const userFake = {
-    email: 'horus@gmail.com',
+  const userAdmin = {
+    email: 'admin@gmail.com',
     password: '123456789',
     role: 'ADMIN'
+  }
+
+  const userProvider = {
+    email: 'provider@gmail.com',
+    password: '123456789',
+    role: 'PROVIDER'
   }
 
   const [data, setData] = useState({
@@ -75,8 +83,11 @@ const Login = ({ roleUser, setRoleUser }) => {
       email = event.target[0].value;
       password = event.target[2].value;
       /* Validar con la data de la BD */
-      if(email == userFake.email && password == userFake.password){
-        setRoleUser(userFake.role);
+      if(email == userAdmin.email && password == userAdmin.password){
+        setRoleUser(userAdmin.role);
+      }
+      else if(email == userProvider.email && password == userProvider.password) {
+        setRoleUser(userProvider.role);
       }else{
         /* validar si el formato es correcto */
         alert("Usuario o Contraseña incorrectas");

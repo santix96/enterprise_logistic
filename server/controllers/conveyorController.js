@@ -14,6 +14,15 @@ let ConveyorController = {
         res.sendStatus(404);
     }
   },
+  GetAllByNeighborhood: async (req, res) => {
+    /*  Validar ObjectId incorrectos que lleguen por param. */
+    var conveyors = await models.Conveyor.find({});
+    if (conveyors) {
+        res.status(200).json(conveyors);
+    } else {
+        res.sendStatus(404);
+    }
+  },
   Create: async (req, res) => {
     /* Crear el modelo con los parametros del form */
     const route = new models.Conveyor({

@@ -302,10 +302,17 @@ const seedInitialData = async () => {
 
   /* Agregar Usuarios */
   const user1 = new models.User({
-    email: 'horus@gmail.com',
-    passwordHash: "123456",
+    email: 'admin@gmail.com',
+    passwordHash: "12345678",
     type: "ADMIN"
   });
+
+  const user2 = new models.User({
+    email: 'provider@gmail.com',
+    passwordHash: "12345678",
+    type: "PROVIDER"
+  });
+
 
   await provider1.save();
   await provider2.save();
@@ -357,6 +364,7 @@ const seedInitialData = async () => {
   await orderByProduct22.save();
 
   await user1.save();
+  await user2.save();
 
 };
 
