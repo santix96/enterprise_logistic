@@ -52,19 +52,35 @@ const AssignRoutes = () => {
   const [routes, setRoutes] = React.useState([]);
   const [route, setRoute] = React.useState('');
 
+  const [checkbox, setCheckbox] = React.useState('false');
+
   const [selectedRoute, setselectedRoute] = React.useState('');
 
   const handleCheckbox = (event) => {
     event.preventDefault();
-    const orderId = event.target.id;
-    orders.map( (order) => {
-      if(order._id == orderId){
-        order.state = "Asignado";
-        order.route = route;
-        const update = assignedOrders.concat(order);
-        setAssignedOrders(update);
-      }
-    })
+    if (checkbox == false) {
+      setCheckbox(true)
+      const orderId = event.target.id;
+      orders.map( (order) => {
+        if(order._id == orderId){
+          order.state = "Pendiente";
+          order.route = '';
+          const update = assignedOrders.concat(order);
+          setAssignedOrders(update);
+        }
+      })
+    }else{
+      setCheckbox(false);
+      const orderId = event.target.id;
+      orders.map( (order) => {
+        if(order._id == orderId){
+          order.state = "Asignado";
+          order.route = route;
+          const update = assignedOrders.concat(order);
+          setAssignedOrders(update);
+        }
+      })
+    }
   }
   const handleAssign = (event) => {
     event.preventDefault();
@@ -75,7 +91,8 @@ const AssignRoutes = () => {
     assignRoutes(assignedOrders);
   }
   const handleConveyorChange = async (event) => {
-    setConveyor(event.target.value);
+     setConveyor(event.target.value);
+    console.log("ASDASDA", conveyor);
   };
 
   const handleRouteChange = async (event) => {
@@ -134,8 +151,8 @@ const AssignRoutes = () => {
                 label="Seleccione una Ruta"
               >
                 {
-                  conveyors.map( (conveyor) => (
-                    <MenuItem value={conveyor}>{conveyor.name}</MenuItem>
+                  conveyors.map( (conv) => (
+                    <MenuItem value={conv}>{conv.name}</MenuItem>
                   ))
                 }
               </Select>
