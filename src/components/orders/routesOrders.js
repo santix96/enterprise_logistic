@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
 import CrudTable from '../crud/children/crudTable.js';
-import { getOrders, createOrder, updateOrder, deleteOrder } from '../../services/services'
+import { getOrders, updateOrder, deleteOrder } from '../../services/services'
 
 const RoutesOrders = () => {
   const [data, setData] = useState([{"status": "NO DATA"}])
@@ -25,6 +25,8 @@ const RoutesOrders = () => {
       <br />
       <CrudTable
         data={data}
+        updateAction={updateOrder}
+        deleteAction={deleteOrder}
       />
     </Container>
   );

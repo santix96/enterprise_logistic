@@ -5,7 +5,7 @@ const OrderController = require('./../controllers/orderController.js')
 // Create express router
 const router = express.Router()
 
-/* Product Routes */
+/* Order Routes */
 router.get('/', OrderController.GetAll)
 router.get('/:email', OrderController.Get)
 router.post('/', OrderController.Create)

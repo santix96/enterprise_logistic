@@ -1,4 +1,6 @@
 let url = 'http://localhost:4000/orders/'
+let zoneUrl = 'http://localhost:4000/zones/';
+let neighborhoodUrl = 'http://localhost:4000/neighborhoods/';
 
 const getOrders = async () => {
   let response = await fetch(url);
@@ -11,6 +13,59 @@ const getOrder = async (id) => {
   let responseData = await response.json();
   return responseData;
 };
+
+const getOrdersByRoute = async (zoneId) => {
+  /* Obtener Zonas */
+  let response = await fetch(zoneUrl);
+  let zones = await response.json();
+  let requiredZone;
+  zones.map( (zone) => {
+    if (zone._id == zoneId) {
+      requiredZone = zone;
+    }
+  })
+
+  /* Obtener barrios */
+  let neighborhoodResponse = await fetch(neighborhoodUrl);
+  let neighborhoods = await neighborhoodResponse.json();
+
+  /* Filtrar unicamente barrios que esten en la zona ingresada */
+  let requiredNeighborhoods = [];
+  neighborhoods.map( (neighborhood) => {
+    if (neighborhood.zone == zoneId) {
+      requiredNeighborhoods.push(neighborhood._id);
+    }
+  })
+
+  /* Obtener transportadores */
+  let orderResponse = await fetch(url);
+  let orders = await orderResponse.json();
+
+  /* Filtrar unicamente transportadores que esten en un barrio dentro de la zona ingresada */
+  let resultOrders = [];
+  orders.filter( (order) => {
+    if (requiredNeighborhoods.includes(order.neighborhood)) {
+      resultOrders.push(order);
+    }
+  })
+
+  return resultOrders;
+}
+
+const assignRoutes = async (assignedRoutes) => {
+  console.log("ORDERS ON SERVICES", assignedRoutes);
+  assignedRoutes.map( (order) => {
+    fetch(url+order._id, {
+       method: "PUT",
+       body: JSON.stringify(order),
+       headers: {
+         "Content-type": "application/json; charset=UTF-8"
+       }
+     })
+   .catch(error => console.error('Error:', error))
+   .then(response => response.json())
+  })
+}
 
 const createOrder = async (target) => {
   const conveyor = {
@@ -52,17 +107,18 @@ const deleteOrder = async (item) => {
 }
 
 const updateOrder = (target) => {
-  const conveyor = {
+  console.log("TARGET", target)
+  const order = {
     _id: target[0].value,
-    name: target[1].value,
-    user: target[2].value,
+    distributor: target[1].value,
+    state: target[2].value,
     neighborhood: target[3].value,
-    route: target[4].value,
+    route: target[6].value,
   }
 
-  fetch(url+conveyor._id, {
+  fetch(url+order._id, {
      method: "PUT",
-     body: JSON.stringify(conveyor),
+     body: JSON.stringify(order),
      headers: {
        "Content-type": "application/json; charset=UTF-8"
      }
@@ -74,7 +130,9 @@ const updateOrder = (target) => {
 export {
   getOrders,
   getOrder,
+  getOrdersByRoute,
   createOrder,
   deleteOrder,
-  updateOrder
+  updateOrder,
+  assignRoutes
 }
