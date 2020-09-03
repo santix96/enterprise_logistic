@@ -70,7 +70,7 @@ const seedInitialData = async () => {
   /* Agregar Productos */
   const product1 = new models.Product({
     name: 'Leche',
-    provider: '5f47a5ac82ec272cc3ee592a',
+    provider: provider1._id,
     buyPrice: 1000,
     weigh: 1000,
     weighUnit: "ML"
@@ -78,7 +78,7 @@ const seedInitialData = async () => {
 
   const product2 = new models.Product({
     name: 'Papas Fritas',
-    provider: '5f38f4f36a382c99fe1c0290',
+    provider: provider2._id,
     buyPrice: 600,
     weigh: 25,
     weighUnit: "GR"
@@ -86,7 +86,7 @@ const seedInitialData = async () => {
 
   const product3 = new models.Product({
     name: 'Yogourt Melocotón',
-    provider: '5f47a5ac82ec272cc3ee592a',
+    provider: provider1._id,
     buyPrice: 2100,
     weigh: 1500,
     weighUnit: "ML"
@@ -94,7 +94,7 @@ const seedInitialData = async () => {
 
   const product4 = new models.Product({
     name: 'Yogourt Fresa',
-    provider: '5f47a5ac82ec272cc3ee592a',
+    provider: provider1._id,
     buyPrice: 2100,
     weigh: 1500,
     weighUnit: "ML"
@@ -102,13 +102,40 @@ const seedInitialData = async () => {
 
   const product5 = new models.Product({
     name: 'De Todito Limón',
-    provider: '5f38f4f36a382c99fe1c0290',
+    provider: provider2._id,
     buyPrice: 1000,
     weigh: 400,
     weighUnit: "GR"
   });
 
   /* Agregar Inventario */
+  const inventory1 = new models.Inventory({
+    product: product1._id,
+    name: product1.name,
+    quantity: 8,
+    sellPrice: 2200
+  });
+
+  const inventory2 = new models.Inventory({
+    product: product3._id,
+    name: product3.name,
+    quantity: 15,
+    sellPrice: 3000
+  });
+
+  const inventory3 = new models.Inventory({
+    product: product4._id,
+    name: product4.name,
+    quantity: 3,
+    sellPrice: 3000
+  });
+
+  const inventory4 = new models.Inventory({
+    product: product2._id,
+    name: product2.name,
+    quantity: 3,
+    sellPrice: 1700
+  });
 
   /* Agregar Ciudades */
   const city1 = new models.City({
@@ -163,7 +190,6 @@ const seedInitialData = async () => {
     name: 'Campo Hermoso',
     zone: '5f4e6c7d78f29b77b289cd8d'
   });
-
 
   /* Agregar Rutas */
   const route1 = new models.Route({
@@ -243,6 +269,11 @@ const seedInitialData = async () => {
   await product4.save();
   await product5.save();
 
+  await inventory1.save();
+  await inventory2.save();
+  await inventory3.save();
+  await inventory4.save();
+
   await city1.save();
 
   await neighborhood1.save();
@@ -286,6 +317,7 @@ const cleanDatabase = async () => {
   models.User.collection.drop();
   models.Neighborhood.collection.drop();
   models.Zone.collection.drop();
+  models.Inventory.collection.drop();
 
   console.log('Deleting tables data....');
 }

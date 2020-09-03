@@ -8,6 +8,7 @@ import RoutesProducts from '../routesProducts';
 import RoutesOrders from '../orders/routesOrders';
 import RoutesDistributors from '../routesDitributors';
 import RoutesProviders from '../routesProviders';
+import RoutesInventory from '../routesInventory';
 
 import SignupTypeSelector from '../signup/signupTypeSelector';
 import DistributorSignUp from '../signup/distributor';
@@ -31,38 +32,43 @@ const Routes = ({ roleUser }) => {
           }
         />
         <Route path = '/signup/proveedor'
-            exact component = {
-              ProviderSignUp
-            }
-          />
+          exact component = {
+            ProviderSignUp
+          }
+        />
         <Route path = '/signup/transportador'
-            exact component = {
-              ConveyorSignUp
-            }
-          />
+          exact component = {
+            ConveyorSignUp
+          }
+        />
 
         /* Rutas Admin */
-        <Route path = '/rutas'
-          exact component = {
-            RoutesCrud
-          }
-        />
+      <Route path = '/rutas'
+        exact component = {
+          RoutesCrud
+        }
+      />
+    <Route path = '/inventario'
+        exact component = {
+          RoutesInventory
+        }
+      />
       <Route path = '/pedidos'
-          exact component = {
-            RoutesOrders
-          }
-        />
-        <Route path = '/transportadores'
-          exact component = {
-            RoutesConveyors
-          }
-        />
+        exact component = {
+          RoutesOrders
+        }
+      />
+      <Route path = '/transportadores'
+        exact component = {
+          RoutesConveyors
+        }
+      />
       <Route path = '/distribuidores'
         exact component = {
           RoutesDistributors
         }
       />
-    <Route path = '/proveedores'
+      <Route path = '/proveedores'
         exact component = {
           RoutesProviders
         }
@@ -76,7 +82,7 @@ const Routes = ({ roleUser }) => {
           exact component = {
             AssignRoutes
           }
-        />
+      />
         {
           roleUser == ''
           ?

@@ -26,6 +26,7 @@ const providerRouter = require('./routes/providerRoute')
 const orderRouter = require('./routes/orderRoute')
 const zoneRouter = require('./routes/zoneRoute')
 const neighborhoodRouter = require('./routes/neighborhoodRoute')
+const inventoryRouter = require('./routes/inventoryRoute')
 
 // Setup default port
 const PORT = process.env.PORT || 4000
@@ -50,6 +51,7 @@ if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
     })
   })
 }
+
 app.use('/api', homeRouter)
 app.use('/cities', cityRouter)
 app.use('/providers', providerRouter)
@@ -62,6 +64,7 @@ app.use('/routes', routeRouter)
 app.use('/users', userRouter)
 app.use('/neighborhoods', neighborhoodRouter)
 app.use('/zones', zoneRouter)
+app.use('/inventory', inventoryRouter)
 
 // Implement route for errors
 app.use((err, req, res, next) => {
@@ -77,6 +80,6 @@ connectDb().then(async () => {
     //cleanDatabase();
 
     /* Para poblar las tablas */
-    seedInitialData();
+    //seedInitialData();
   });
 });

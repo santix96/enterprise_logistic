@@ -1,10 +1,10 @@
-import axios from 'axios';
 import { getProducts, getProduct, createProduct, deleteProduct, updateProduct } from './componentServices/products';
 import { getRoutes, getRoute, createRoute, updateRoute, deleteRoute } from './componentServices/routes';
 import { getConveyors, getConveyor, getConveyorsByZone, createConveyor, deleteConveyor, updateConveyor, assignConveyor } from './componentServices/conveyors';
 import { getOrders, getOrder, getOrdersByRoute, createOrder, deleteOrder, updateOrder, assignRoutes } from './componentServices/orders';
 import { getDistributors, getDistributor, createDistributor, deleteDistributor, updateDistributor } from './componentServices/distributors';
 import { getProviders, getProvider, createProvider, deleteProvider, updateProvider } from './componentServices/providers';
+import { getInventory, getById, addRegistry, deleteRegistry, updateRegistry } from './componentServices/inventory';
 import { getUsers, getUserByEmail } from './componentServices/users';
 
 
@@ -44,5 +44,10 @@ export {
   deleteProvider,
   updateProvider,
   getUserByEmail,
-  getUsers
+  getUsers,
+  getInventory,
+  getById,
+  addRegistry,
+  deleteRegistry,
+  updateRegistry
 };
