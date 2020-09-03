@@ -24,6 +24,7 @@ const conveyorRouter = require('./routes/conveyorRoute')
 const distributorRouter = require('./routes/distributorRoute')
 const providerRouter = require('./routes/providerRoute')
 const orderRouter = require('./routes/orderRoute')
+const ordersByProductRouter = require('./routes/ordersByProductRoute')
 const zoneRouter = require('./routes/zoneRoute')
 const neighborhoodRouter = require('./routes/neighborhoodRoute')
 const inventoryRouter = require('./routes/inventoryRoute')
@@ -58,6 +59,7 @@ app.use('/providers', providerRouter)
 app.use('/distributors', distributorRouter)
 app.use('/conveyors', conveyorRouter)
 app.use('/orders', orderRouter)
+app.use('/orders-by-product', ordersByProductRouter)
 app.use('/users', userRouter)
 app.use('/products', productRouter)
 app.use('/routes', routeRouter)
@@ -80,6 +82,6 @@ connectDb().then(async () => {
     //cleanDatabase();
 
     /* Para poblar las tablas */
-    //seedInitialData();
+    seedInitialData();
   });
 });

@@ -9,6 +9,7 @@ import RoutesOrders from '../orders/routesOrders';
 import RoutesDistributors from '../routesDitributors';
 import RoutesProviders from '../routesProviders';
 import RoutesInventory from '../routesInventory';
+import RoutesOdersByProduct from '../ordersByProductRoute/routesOrdersByProduct';
 
 import SignupTypeSelector from '../signup/signupTypeSelector';
 import DistributorSignUp from '../signup/distributor';
@@ -76,6 +77,11 @@ const Routes = ({ roleUser }) => {
       <Route path = '/productos'
         exact component = {
           RoutesProducts
+        }
+      />
+    <Route path = '/pedidos-por-producto'
+        exact component = {
+          RoutesOdersByProduct
         }
       />
       <Route path = '/asignar-rutas'

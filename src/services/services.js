@@ -6,6 +6,7 @@ import { getDistributors, getDistributor, createDistributor, deleteDistributor, 
 import { getProviders, getProvider, createProvider, deleteProvider, updateProvider } from './componentServices/providers';
 import { getInventory, getById, addRegistry, deleteRegistry, updateRegistry } from './componentServices/inventory';
 import { getUsers, getUserByEmail } from './componentServices/users';
+import { getOrdersByProduct } from './componentServices/ordersByProduct';
 
 
 export {
@@ -49,5 +50,6 @@ export {
   getById,
   addRegistry,
   deleteRegistry,
-  updateRegistry
+  updateRegistry,
+  getOrdersByProduct
 };

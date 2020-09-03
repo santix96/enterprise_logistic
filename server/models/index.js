@@ -6,6 +6,7 @@ import Distributor from './distributor';
 import Inventory from './inventory';
 import Neighborhood from './neighborhood';
 import Order from './order';
+import OrderByProduct from './ordersByProduct';
 import Product from './product';
 import Provider from './provider';
 import Route from './route';
@@ -252,6 +253,53 @@ const seedInitialData = async () => {
     neighborhood: "5f38f4f36a382c99fe1c0302"
   });
 
+  /* Relacion productos con pedidos */
+  /*
+    Piden:
+    - 10 paquetes de Papas
+    - 10 bolsas de yogourt fresa
+    - 5 bolsas de yogourt Mora
+  */
+  const orderByProduct1 = new models.OrderByProduct ({
+    order: order1._id,
+    product: product2._id,
+    quantity: 10,
+    total: product2.buyPrice*10,
+  });
+
+  const orderByProduct12 = new models.OrderByProduct ({
+    order: order1._id,
+    product: product4._id,
+    quantity: 10,
+    total: product4.buyPrice*10,
+  });
+
+  const orderByProduct13 = new models.OrderByProduct ({
+    order: order2._id,
+    product: product3._id,
+    quantity: 5,
+    total: product3.buyPrice*5,
+  });
+
+  /*
+    Piden
+    - 5 de todito de limon
+    - 6 bolsas de leche
+  */
+  const orderByProduct2 = new models.OrderByProduct ({
+    order: order2._id,
+    product: product5._id,
+    quantity: 5,
+    total: product5.buyPrice*5,
+  });
+
+  const orderByProduct22 = new models.OrderByProduct ({
+    order: order1._id,
+    product: product1._id,
+    quantity: 6,
+    total: product1.buyPrice*6,
+  });
+
   /* Agregar Usuarios */
   const user1 = new models.User({
     email: 'horus@gmail.com',
@@ -302,6 +350,12 @@ const seedInitialData = async () => {
   await distributor2.save();
   await distributor3.save();
 
+  await orderByProduct1.save();
+  await orderByProduct12.save();
+  await orderByProduct13.save();
+  await orderByProduct2.save();
+  await orderByProduct22.save();
+
   await user1.save();
 
 };
@@ -313,6 +367,7 @@ const cleanDatabase = async () => {
   models.Route.collection.drop();
   models.Conveyor.collection.drop();
   models.Order.collection.drop();
+  models.OrderByProduct.collection.drop();
   models.Distributor.collection.drop();
   models.User.collection.drop();
   models.Neighborhood.collection.drop();
@@ -321,7 +376,7 @@ const cleanDatabase = async () => {
 
   console.log('Deleting tables data....');
 }
-const models = { City, Conveyor, Distributor, Inventory, Neighborhood, Order, Product, Provider, Route, Transaction, Zone, User };
+const models = { City, Conveyor, Distributor, Inventory, Neighborhood, Order, OrderByProduct, Product, Provider, Route, Transaction, Zone, User };
 
 export { connectDb, seedInitialData, cleanDatabase };
 
