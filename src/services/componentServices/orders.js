@@ -44,7 +44,7 @@ const getOrdersByRoute = async (zoneId) => {
   /* Filtrar unicamente transportadores que esten en un barrio dentro de la zona ingresada */
   let resultOrders = [];
   orders.filter( (order) => {
-    if (requiredNeighborhoods.includes(order.neighborhood)) {
+    if (requiredNeighborhoods.includes(order.neighborhood) && order.state == 'Pendiente') {
       resultOrders.push(order);
     }
   })
