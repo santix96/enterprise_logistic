@@ -109,9 +109,26 @@ const seedInitialData = async () => {
     weighUnit: "GR"
   });
 
+  const product6 = new models.Product({
+    name: 'Gomas Gusanos',
+    provider: provider3._id,
+    buyPrice: 800,
+    weigh: 90,
+    weighUnit: "GR"
+  });
+
+  const product7 = new models.Product({
+    name: 'Trululu Feroz',
+    provider: provider3._id,
+    buyPrice: 1500,
+    weigh: 120,
+    weighUnit: "GR"
+  });
+
   /* Agregar Inventario */
   const inventory1 = new models.Inventory({
     product: product1._id,
+    provider: provider1._id,
     name: product1.name,
     quantity: 8,
     sellPrice: 2200
@@ -119,6 +136,7 @@ const seedInitialData = async () => {
 
   const inventory2 = new models.Inventory({
     product: product3._id,
+    provider: provider1._id,
     name: product3.name,
     quantity: 15,
     sellPrice: 3000
@@ -126,6 +144,7 @@ const seedInitialData = async () => {
 
   const inventory3 = new models.Inventory({
     product: product4._id,
+    provider: provider1._id,
     name: product4.name,
     quantity: 3,
     sellPrice: 3000
@@ -133,9 +152,28 @@ const seedInitialData = async () => {
 
   const inventory4 = new models.Inventory({
     product: product2._id,
+    provider: provider2._id,
     name: product2.name,
     quantity: 3,
     sellPrice: 1700
+  });
+
+  https://app.lucidchart.com/documents/edit/fe1d61f9-3999-4280-99ed-7f6175e479f7/0_0?beaconFlowId=266C2369411A9401#?folder_id=home&browser=icon
+
+  const inventory5 = new models.Inventory({
+    product: product5._id,
+    provider: provider2._id,
+    name: product5.name,
+    quantity: 3,
+    sellPrice: 2300
+  });
+
+  const inventory6 = new models.Inventory({
+    product: product7._id,
+    provider: provider3._id,
+    name: product7.name,
+    quantity: 15,
+    sellPrice: 800
   });
 
   /* Agregar Ciudades */
@@ -153,7 +191,6 @@ const seedInitialData = async () => {
       "Centro",
       "Parque Caldas"
     ],
-
   });
 
   /* Agregar Zonas */
@@ -310,7 +347,8 @@ const seedInitialData = async () => {
   const user2 = new models.User({
     email: 'provider@gmail.com',
     passwordHash: "12345678",
-    type: "PROVIDER"
+    type: "PROVIDER",
+    userId: provider1._id
   });
 
 
@@ -323,11 +361,15 @@ const seedInitialData = async () => {
   await product3.save();
   await product4.save();
   await product5.save();
+  await product6.save();
+  await product7.save();
 
   await inventory1.save();
   await inventory2.save();
   await inventory3.save();
   await inventory4.save();
+  await inventory5.save();
+  await inventory6.save();
 
   await city1.save();
 
