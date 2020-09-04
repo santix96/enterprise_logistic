@@ -86,7 +86,6 @@ const Login = ({ roleUser, setRoleUser, userId, setUserId }) => {
       password = event.target[2].value;
       /* Validar con la data de la BD */
       let x = {};
-      console.log(">GET USERS BY EMAIL", x)
       const fetchedUsers = await getUsers();
 
       fetchedUsers.forEach((user, i) => {

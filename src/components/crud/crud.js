@@ -35,7 +35,7 @@ const Crud = ({
               deleteAction={deleteAction}
             />
           </Grid>
-          <Grid item xs>
+          <Grid item xs={12}>
             <Dialog
               buttonLabel={dialogBtnLabel}
               description={dialogDescription}

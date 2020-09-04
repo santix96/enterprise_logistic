@@ -23,7 +23,7 @@ const ProviderInventoryCrud = ({ roleUser, idUser }) => {
     <Crud
       label={"Productos en Inventario"}
       data={data}
-      buttonPosition={"right"}
+      buttonPosition={"center"}
       dialogBtnLabel={"Agregar"}
       dialogDescription={"Ingrese los datos de la ruta."}
       createAction={addRegistry}

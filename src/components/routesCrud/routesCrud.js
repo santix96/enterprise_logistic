@@ -18,7 +18,7 @@ const RoutesCrud = () => {
     <Crud
       label={"Rutas"}
       data={data}
-      buttonPosition={"right"}
+      buttonPosition={"center"}
       dialogBtnLabel={"Agregar"}
       dialogDescription={"Ingreselos datos de la ruta."}
       createAction={createRoute}

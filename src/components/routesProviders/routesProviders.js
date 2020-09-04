@@ -17,7 +17,7 @@ const RoutesProducts = () => {
     <Crud
       label={"Proveedores"}
       data={data}
-      buttonPosition={"right"}
+      buttonPosition={"center"}
       dialogBtnLabel={"Agregar"}
       dialogDescription={"Descripcion de prueba"}
       dialogActionTitle={"Editar Proveedor"}

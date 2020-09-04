@@ -15,7 +15,7 @@ const InventoryCrud = () => {
     <Crud
       label={"Inventario"}
       data={data}
-      buttonPosition={"right"}
+      buttonPosition={"center"}
       dialogBtnLabel={"Agregar"}
       dialogDescription={"Ingreselos datos de la ruta."}
       createAction={addRegistry}
