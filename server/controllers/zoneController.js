@@ -2,8 +2,8 @@ import models from '../models';
 
 let ZoneController = {
   GetAll: async (req, res) => {
-    var products = await models.Zone.find({});
-    res.json(products)
+    var zone = await models.Zone.find({});
+    res.json(zone)
   },
   Get: async (req, res) => {
     /*  Validar ObjectId incorrectos que lleguen por param. */
@@ -16,36 +16,32 @@ let ZoneController = {
   },
   Create: async (req, res) => {
     /* Crear el modelo con los parametros del form */
-    const product = new models.Product({
+    const zone = new models.Zone({
       name: req.body.name,
-      provider: provider.id,
-      buyPrice: req.body.buyPrice,
-      weigh: req.body.weigh,
-      weighUnit: req.body.weighUnit,
     });
 
     /* insertar el modelo a la BD */
-    await product.save()
+    await zone.save()
     .then(data => {
       res.send(data);
-      console.log("Product created ...")
+      console.log("Zone created ...")
     });
   },
   Delete: async (req, res) => {
-    await models.Product.deleteOne({_id: req.body._id})
-    console.log("Product deleted ...")
+    await models.Zone.deleteOne({_id: req.body._id})
+    console.log("Zone deleted ...")
   },
   Update: async (req, res) => {
-    await models.Product.findOneAndUpdate(
+    await models.Zone.findOneAndUpdate(
       {_id: req.params.id}, // find a document with that filter
       req.body, // document to insert
       {upsert: true, new: true, runValidators: true}, // options
-      function (err, updatedProduct) { // callback
+      function (err, updatedZone) { // callback
           if (err) console.log('ERROR '+ err);
-          else res.json(updatedProduct)
+          else res.json(updatedZone)
       }
     );
-    console.log("Product updated ...")
+    console.log("Zone updated ...")
   }
 }
 

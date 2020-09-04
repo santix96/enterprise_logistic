@@ -32,6 +32,7 @@ const NavSelector = ({ roleUser, resetUserState, ...props }) => {
         <Button href="/asignar-rutas" style={styles.navButton}>Asignar Rutas</Button>
         <Button href="/pedidos" style={styles.navButton}>Pedidos</Button>
         <Button href="/rutas" style={styles.navButton}>Rutas</Button>
+        <Button href="/zonas" style={styles.navButton}>Zonas</Button>
         <Button href="/transportadores" style={styles.navButton}>Transportadores</Button>
         <Button href="/distribuidores" style={styles.navButton}>Distribuidores</Button>
         <Button href="/proveedores" style={styles.navButton}>Proveedores</Button>

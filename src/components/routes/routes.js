@@ -8,6 +8,7 @@ import RoutesProducts from '../routesProducts';
 import RoutesOrders from '../orders/routesOrders';
 import RoutesDistributors from '../routesDitributors';
 import RoutesProviders from '../routesProviders';
+import ZonesCrud from '../zonesCrud';
 import RoutesInventory from '../routesInventory';
 import ProviderInventory from '../providerInventory';
 import RoutesOdersByProduct from '../ordersByProductRoute/routesOrdersByProduct';
@@ -50,6 +51,12 @@ const Routes = ({ roleUser }) => {
           RoutesCrud
         }
       />
+
+    <Route path = '/zonas'
+      exact component = {
+        ZonesCrud
+      }
+    />
     <Route path = '/inventario'
         exact component = {
           RoutesInventory

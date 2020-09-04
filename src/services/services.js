@@ -5,9 +5,9 @@ import { getOrders, getOrder, getOrdersByRoute, createOrder, deleteOrder, update
 import { getDistributors, getDistributor, createDistributor, deleteDistributor, updateDistributor } from './componentServices/distributors';
 import { getProviders, getProvider, createProvider, deleteProvider, updateProvider } from './componentServices/providers';
 import { getInventory, getById, addRegistry, deleteRegistry, updateRegistry } from './componentServices/inventory';
+import { getZones, getZone, createZone, deleteZone, updateZone } from './componentServices/zones';
 import { getUsers, getUserByEmail } from './componentServices/users';
 import { getOrdersByProduct } from './componentServices/ordersByProduct';
-
 
 export {
   getProducts,
@@ -51,5 +51,10 @@ export {
   addRegistry,
   deleteRegistry,
   updateRegistry,
-  getOrdersByProduct
+  getOrdersByProduct,
+  getZones,
+  getZone,
+  createZone,
+  deleteZone,
+  updateZone
 };
