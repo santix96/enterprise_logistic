@@ -9,6 +9,11 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+import TableContainer from '@material-ui/core/TableContainer';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+
+
 
 import Checkbox from '@material-ui/core/Checkbox';
 import TableHead from '@material-ui/core/TableHead';
@@ -25,7 +30,6 @@ const AssignRoutes = () => {
      flexGrow: 1,
      marginTop: 30,
      display: 'flex',
-     oveflow: "auto",
      maxWidth: "100%"
     },
     formControl: {
@@ -92,7 +96,6 @@ const AssignRoutes = () => {
   }
   const handleConveyorChange = async (event) => {
      setConveyor(event.target.value);
-    console.log("ASDASDA", conveyor);
   };
 
   const handleRouteChange = async (event) => {
@@ -122,7 +125,7 @@ const AssignRoutes = () => {
         </Typography>
         <br></br>
         <Grid container spacing={4} justify="center">
-          <Grid item xs={6}>
+          <Grid item xs={3} md={6}>
             <FormControl variant="outlined" className={classes.formControl}>
               <InputLabel id="demo-simple-select-outlined-label">Seleccione una Ruta</InputLabel>
               <Select
@@ -140,7 +143,7 @@ const AssignRoutes = () => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <FormControl variant="outlined" className={classes.formControl}>
               <InputLabel id="demo-simple-select-outlined-label">Seleccione un Transportador</InputLabel>
               <Select
@@ -161,52 +164,38 @@ const AssignRoutes = () => {
         </Grid>
         <form id='assignForm' onSubmit={handleAssign}>
           <Paper>
-            <div>
-              <Grid container spacing={3} justify="center" className={classes.titlesGrid}>
-                <Grid item xs={1} />
-                <Grid item xs={3}>
-                  <strong>Distribuidor</strong>
-                </Grid>
-                <Grid item xs={3}>
-                  <strong>Ruta</strong>
-                </Grid>
-                <Grid item xs={3}>
-                  <strong>Estado</strong>
-                </Grid>
-                <Grid item xs={2}>
-                  <strong>Fecha de Solicitud</strong>
-                </Grid>
-                {
-                  orders.map( (order) => {
-                    return (
-                      <>
-                        <Grid item xs={1}>
-                          <Checkbox
-                            id={order._id}
-                            color="primary"
-                            inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            style={{paddingTop: '2px'}}
-                            onChange={handleCheckbox}
-                          />
-                        </Grid>
-                        <Grid item xs={3}>
-                          {order.distributor}
-                        </Grid>
-                        <Grid item xs={3}>
-                          {order.route}
-                        </Grid>
-                        <Grid item xs={3}>
-                          {order.state}
-                        </Grid>
-                        <Grid item xs={2}>
-                          {order.createdAt}
-                        </Grid>
-                      </>
-                    );
-                  })
-                }
-              </Grid>
-            </div>
+            <TableContainer component={Paper}>
+              <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell></TableCell>
+                    <TableCell align="right"><strong>Distribuidor</strong></TableCell>
+                    <TableCell align="right"><strong>Ruta</strong></TableCell>
+                    <TableCell align="right"><strong>Estado</strong></TableCell>
+                    <TableCell align="right"><strong>Fecha de Solicitud</strong></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {orders.map((order) => (
+                    <TableRow key={order._id}>
+                      <TableCell component="th" scope="row">
+                        <Checkbox
+                          id={order._id}
+                          color="primary"
+                          inputProps={{ 'aria-label': 'secondary checkbox' }}
+                          style={{paddingTop: '2px'}}
+                          onChange={handleCheckbox}
+                        />
+                      </TableCell>
+                      <TableCell align="right">{order.distributor}</TableCell>
+                      <TableCell align="right">{order.route}</TableCell>
+                      <TableCell align="right">{order.state}</TableCell>
+                      <TableCell align="right">{order.createdAt}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Paper>
         </form>
         <Button type='submit' form='assignForm' variant='contained' color='primary' className={classes.saveButton}>
