@@ -3,14 +3,14 @@ let url = 'http://localhost:4000/users/'
 const getUsers = async () => {
   let response = await fetch(url);
   let responseData = await response.json();
-  console.log("REPONSE DATA", responseData)
   return responseData;
 };
 
+
 const getUserByEmail = async (email, password) => {
-  console.log("EMAIL", email);
   let response = await fetch(url);
   let responseData = await response.json();
+
   return responseData;
 };
 

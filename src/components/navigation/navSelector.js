@@ -47,8 +47,7 @@ const NavSelector = ({ roleUser, resetUserState, ...props }) => {
         <Typography variant="h6" >
           Enterprise Logistic
         </Typography>
-        <Button href="/comprar" style={styles.navButton}>Añadir Productos</Button>
-        <Button href="/mis-pedidos" style={styles.navButton}>Consultar Productos</Button>
+        <Button href="/mi-inventario" style={styles.navButton}>Ver mi Inventario</Button>
         <Button href="/login" style={styles.navButton} onClick={handleLogout}>Logout</Button>
       </>
     )

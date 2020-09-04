@@ -9,6 +9,7 @@ import RoutesOrders from '../orders/routesOrders';
 import RoutesDistributors from '../routesDitributors';
 import RoutesProviders from '../routesProviders';
 import RoutesInventory from '../routesInventory';
+import ProviderInventory from '../providerInventory';
 import RoutesOdersByProduct from '../ordersByProductRoute/routesOrdersByProduct';
 
 import SignupTypeSelector from '../signup/signupTypeSelector';
@@ -89,6 +90,12 @@ const Routes = ({ roleUser }) => {
             AssignRoutes
           }
       />
+    /* Rutas Proveedores */
+      <Route path = '/mi-inventario'
+          exact component = {
+            ProviderInventory
+          }
+      />
         {
           roleUser == ''
           ?
@@ -100,6 +107,7 @@ const Routes = ({ roleUser }) => {
           :
           <Redirect to="/home" />
         }
+
         /*
           Rutas Faltantes:
           - Admin

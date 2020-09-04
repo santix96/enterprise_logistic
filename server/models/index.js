@@ -158,8 +158,6 @@ const seedInitialData = async () => {
     sellPrice: 1700
   });
 
-  https://app.lucidchart.com/documents/edit/fe1d61f9-3999-4280-99ed-7f6175e479f7/0_0?beaconFlowId=266C2369411A9401#?folder_id=home&browser=icon
-
   const inventory5 = new models.Inventory({
     product: product5._id,
     provider: provider2._id,

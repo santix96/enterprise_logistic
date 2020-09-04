@@ -6,6 +6,10 @@ const inventorySchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Product'
     },
+    provider: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Provider'
+    },
     name: {
       type: String,
       unique: true,

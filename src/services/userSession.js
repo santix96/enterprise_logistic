@@ -6,6 +6,8 @@ import { createStore } from 'redux'
 const SET_ROLUSER = 'SET_ROLUSER';
 const GET_ROLEUSER = 'GET_ROLEUSER';
 const RESET_USER_STATE = 'RESET_USER_STATE';
+const SET_USER_ID = 'SET_USER_ID';
+const GET_USER_ID = 'GET__USER_ID';
 
 /**
  * Estado global del usuario, utilizando react-redux
@@ -42,13 +44,25 @@ function userInformation(userState = initialUserState, action) {
       return userState;
 
     case RESET_USER_STATE:
-        userState = undefined;
-        userState = initialUserState;
-        localStorage.removeItem('userState');
+      userState = undefined;
+      userState = initialUserState;
+      localStorage.removeItem('userState');
       return userState;
 
     case GET_ROLEUSER:
-        return userState.roleUser;
+      return userState.roleUser;
+
+    case GET_USER_ID:
+      return userState.idUser;
+
+    case SET_USER_ID:
+      userState = {
+        ...userState,
+          idUser: action.idUser
+      }
+      console.log("?????????", userState)
+      localStorage.setItem('userState', JSON.stringify(userState));
+      return userState;
 
     default:
       return userState
@@ -85,9 +99,22 @@ export const getRoleUser= () => {
   }
 }
 
+export const getUserId= () => {
+  return {
+    type: GET_USER_ID
+  }
+}
+
+export const setUserId = (idUser) => {
+  return {
+    type: SET_USER_ID,
+    idUser: idUser
+  }
+}
+
 /**
  * Inicializacion del store
  */
 const store = createStore(userInformation);
 
-export default store
+export default store;

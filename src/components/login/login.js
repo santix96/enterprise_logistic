@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -15,15 +15,15 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import { setRoleUser, resetUserState, getRoleUser } from '../../services/userSession'
-import { getUserByEmail } from '../../services/services'
+import { setRoleUser, resetUserState, getRoleUser, setUserId } from '../../services/userSession'
+import { getUsers, getUserByEmail } from '../../services/services'
 
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit">
         Enterprise Logistic
       </Link>{' '}
       {new Date().getFullYear()}
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = ({ roleUser, setRoleUser }) => {
+const Login = ({ roleUser, setRoleUser, userId, setUserId }) => {
   const classes = useStyles();
 
   const userAdmin = {
@@ -67,6 +67,8 @@ const Login = ({ roleUser, setRoleUser }) => {
     role: 'PROVIDER'
   }
 
+  const [users, setUsers] = useState([]);
+
   const [data, setData] = useState({
     email: '',
     password: ''
@@ -78,16 +80,29 @@ const Login = ({ roleUser, setRoleUser }) => {
     setData({ ...data,[e.target.name]: e.target.value });
   }
 
-  const onSubmitLogin = (event) => {
+    const onSubmitLogin =  async (event) => {
       event.preventDefault();
       email = event.target[0].value;
       password = event.target[2].value;
       /* Validar con la data de la BD */
-      if(email == userAdmin.email && password == userAdmin.password){
-        setRoleUser(userAdmin.role);
-      }
-      else if(email == userProvider.email && password == userProvider.password) {
-        setRoleUser(userProvider.role);
+      let x = {};
+      console.log(">GET USERS BY EMAIL", x)
+      const fetchedUsers = await getUsers();
+
+      fetchedUsers.forEach((user, i) => {
+        if (user.email == email) {
+          x = user
+        }
+      });
+
+      console.log("X", x);
+
+      if(password == x.passwordHash){
+        setRoleUser(x.type);
+        if (x.type == "PROVIDER") {
+          setUserId(x.userId)
+          console.log("--->", userId)
+        }
       }else{
         /* validar si el formato es correcto */
         alert("Usuario o Contraseña incorrectas");
@@ -168,13 +183,16 @@ const Login = ({ roleUser, setRoleUser }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setRoleUser: (roleUser) => dispatch(setRoleUser(roleUser)),
-    resetUserState: () => dispatch(resetUserState())
+    resetUserState: () => dispatch(resetUserState()),
+    setUserId: (idUser) => dispatch(setUserId(idUser))
   }
 }
 
 const mapStateToProps = (userInfo) => {
   return {
-      roleUser: userInfo.roleUser
+      roleUser: userInfo.roleUser,
+      userId: userInfo.userId
+
   }
 }
 
