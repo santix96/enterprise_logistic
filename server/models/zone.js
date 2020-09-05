@@ -8,7 +8,7 @@ const zoneSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { timestamps: true },
+  { timestamps: true, versionKey: false  },
 );
 
 const Zone = mongoose.model('Zone', zoneSchema);

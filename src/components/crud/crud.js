@@ -5,12 +5,34 @@ import Typography from '@material-ui/core/Typography';
 import CrudTable from './children/crudTable.js';
 import Dialog from '../dialog'
 
-const Crud = ({label, data, dialogBtnLabel, buttonPosition, dialogDescription, dialogActionTitle, dialogActionDescription}) => {
+const Crud = ({
+  label,
+  data,
+  dialogBtnLabel,
+  buttonPosition,
+  dialogDescription,
+  dialogActionTitle,
+  dialogActionDescription,
+  createAction,
+  updateAction,
+  deleteAction
+}) => {
+  const [width, setWidth] = React.useState(window.innerWidth);
+
+  const updateWidth = () => {
+    setWidth(window.innerWidth);
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  });
+
   return (
       <Container>
         <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Typography variant="h1" component="h2" gutterBottom>
+          <Grid item xs={12} mx={6}>
+            <Typography variant={width > 992 ? 'h1' : 'h2'} component="h2" gutterBottom>
               {label}
             </Typography>
           </Grid>
@@ -20,9 +42,11 @@ const Crud = ({label, data, dialogBtnLabel, buttonPosition, dialogDescription, d
               data={data}
               editActionTitle={dialogActionTitle}
               editActionDescription={dialogActionDescription}
+              updateAction={updateAction}
+              deleteAction={deleteAction}
             />
           </Grid>
-          <Grid item xs>
+          <Grid item xs={12}>
             <Dialog
               buttonLabel={dialogBtnLabel}
               description={dialogDescription}
@@ -30,6 +54,7 @@ const Crud = ({label, data, dialogBtnLabel, buttonPosition, dialogDescription, d
               dialogButtonLabel="Crear"
               title={"Create"}
               fields={data[0]}
+              action={createAction}
             />
           </Grid>
         </Grid>

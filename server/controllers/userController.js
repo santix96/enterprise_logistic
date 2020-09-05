@@ -1,17 +1,19 @@
 import models from '../models';
 
 let UserController = {
-  ValidateUser: async (req, res) => {
-    try {
-      var user = await models.User.findById(req.user.id);
-      res.json(user)
-    } catch (e) {
-      console.log(e.message);
-      return res.status(500).json({ msg: "Server Error..." });
+  GetAll: async (req, res) => {
+    var users = await models.User.find({});
+    res.json(users)
+  },
+  Get: async (req, res) => {
+    /*  Validar ObjectId incorrectos que lleguen por param. */
+    var user = await models.User.find({ email: req.params.email });
+    if (user) {
+        res.status(200).json(user);
+    } else {
+        res.sendStatus(404);
     }
-    // res.send('There will be dragons, not posts.')
-
-  }
+  },
 }
 
 module.exports = UserController;

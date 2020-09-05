@@ -22,7 +22,7 @@ const providerSchema = new mongoose.Schema(
       ref: 'User'
     },
   },
-  { timestamps: true },
+  { timestamps: true, versionKey: false },
 );
 
 const Provider = mongoose.model('Provider', providerSchema);

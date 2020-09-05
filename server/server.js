@@ -1,7 +1,7 @@
 // Import models
 import
 models, {
-  connectDb, seedInitialData
+  connectDb, seedInitialData, cleanDatabase
 } from './models';
 
 // Import express framework
@@ -20,6 +20,14 @@ const routeRouter = require('./routes/routeRoute')
 const productRouter = require('./routes/productRoute')
 const cityRouter = require('./routes/cityRoute')
 const userRouter = require('./routes/userRoute')
+const conveyorRouter = require('./routes/conveyorRoute')
+const distributorRouter = require('./routes/distributorRoute')
+const providerRouter = require('./routes/providerRoute')
+const orderRouter = require('./routes/orderRoute')
+const ordersByProductRouter = require('./routes/ordersByProductRoute')
+const zoneRouter = require('./routes/zoneRoute')
+const neighborhoodRouter = require('./routes/neighborhoodRoute')
+const inventoryRouter = require('./routes/inventoryRoute')
 
 // Setup default port
 const PORT = process.env.PORT || 4000
@@ -44,18 +52,21 @@ if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
     })
   })
 }
+
 app.use('/api', homeRouter)
-app.use('/ciudades', cityRouter)
-// app.use('/proveedores', providerRouter)
-// app.use('/distribuidores', distributorRouter)
-// app.use('/transportadores', conveyorRouter)
-// app.use('/ordenes', orderRouter)
-// app.use('/usuarios', userRouter)
+app.use('/cities', cityRouter)
+app.use('/providers', providerRouter)
+app.use('/distributors', distributorRouter)
+app.use('/conveyors', conveyorRouter)
+app.use('/orders', orderRouter)
+app.use('/orders-by-product', ordersByProductRouter)
+app.use('/users', userRouter)
 app.use('/products', productRouter)
 app.use('/routes', routeRouter)
 app.use('/users', userRouter)
-// app.use('/transacciones', transactiontRouter)
-// app.use('/zonas', zoneRouter)
+app.use('/neighborhoods', neighborhoodRouter)
+app.use('/zones', zoneRouter)
+app.use('/inventory', inventoryRouter)
 
 // Implement route for errors
 app.use((err, req, res, next) => {
@@ -68,12 +79,9 @@ connectDb().then(async () => {
   app.listen(PORT, function() {
     console.log(`Server is running on: ${PORT}`);
     /* Para limpiar las tablas */
-    // models.Provider.deleteMany({}, function (err) {});
-    // models.Product.deleteMany({}, function (err) {});
-    // models.City.deleteMany({}, function (err) {});
-    // console.log('Deleting tables data....');
+    //cleanDatabase();
 
     /* Para poblar las tablas */
-    // seedInitialData();
+    seedInitialData();
   });
 });

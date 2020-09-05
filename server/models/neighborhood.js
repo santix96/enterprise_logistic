@@ -12,7 +12,7 @@ const neighborhoodSchema = new mongoose.Schema(
       ref: 'Zone'
     },
   },
-  { timestamps: true },
+  { timestamps: true, versionKey: false },
 );
 
 const Neighborhood = mongoose.model('Neighborhood', neighborhoodSchema);

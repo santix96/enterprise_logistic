@@ -2,26 +2,29 @@ import mongoose from 'mongoose';
 
 const inventorySchema = new mongoose.Schema(
   {
-    provider: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Provider'
-    },
     product: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Product'
     },
+    provider: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Provider'
+    },
+    name: {
+      type: String,
+      unique: true,
+      required: true,
+    },
     quantity: {
       type: Number,
-      unique: true,
       required: true,
     },
     sellPrice: {
       type: Number,
-      unique: true,
       required: true,
     },
   },
-  { timestamps: true },
+  { timestamps: true, versionKey: false },
 );
 
 const Inventory = mongoose.model('Inventory', inventorySchema);

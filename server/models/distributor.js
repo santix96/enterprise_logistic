@@ -21,7 +21,7 @@ const distributorSchema = new mongoose.Schema(
       ref: 'Zone'
     },
   },
-  { timestamps: true },
+  { timestamps: true, versionKey: false },
 );
 
 const Distributor = mongoose.model('Distributor', distributorSchema);

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
@@ -24,17 +25,26 @@ const NavSelector = ({ roleUser, resetUserState, ...props }) => {
   if (roleUser == 'ADMIN') {
     return(
       <>
-        <SupervisedUserCircleIcon fontSize={"large"} style={styles.roleIcon} />
-        <Typography variant="h6" >
-          Enterprise Logistic
-        </Typography>
-        <Button href="/inventario" style={styles.navButton}>Inventario</Button>
-        <Button href="/asignar-rutas" style={styles.navButton}>Asignar Rutas</Button>
-        <Button href="/#" style={styles.navButton}>Pedidos</Button>
-        <Button href="/rutas" style={styles.navButton}>Rutas</Button>
-        <Button href="/transportadores" style={styles.navButton}>Transportadores</Button>
-        <Button href="/productos" style={styles.navButton}>Productos</Button>
-        <Button href="/login" style={styles.navButton} onClick={handleLogout}>Logout</Button>
+        <Grid container>
+          <Grid item xs={12} >
+            <SupervisedUserCircleIcon fontSize={"large"} style={styles.roleIcon} />
+            <Typography variant="h6" >
+              Enterprise Logistic
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Button href="/inventario" style={styles.navButton}>Inventario</Button>
+            <Button href="/asignar-rutas" style={styles.navButton}>Asignar Rutas</Button>
+            <Button href="/pedidos" style={styles.navButton}>Pedidos</Button>
+            <Button href="/rutas" style={styles.navButton}>Rutas</Button>
+            <Button href="/zonas" style={styles.navButton}>Zonas</Button>
+            <Button href="/transportadores" style={styles.navButton}>Transportadores</Button>
+            <Button href="/distribuidores" style={styles.navButton}>Distribuidores</Button>
+            <Button href="/proveedores" style={styles.navButton}>Proveedores</Button>
+            <Button href="/productos" style={styles.navButton}>Productos</Button>
+            <Button href="/login" style={styles.navButton} onClick={handleLogout}>Logout</Button>
+          </Grid>
+        </Grid>
       </>
     )
   }
@@ -45,8 +55,7 @@ const NavSelector = ({ roleUser, resetUserState, ...props }) => {
         <Typography variant="h6" >
           Enterprise Logistic
         </Typography>
-        <Button href="/comprar" style={styles.navButton}>Añadir Productos</Button>
-        <Button href="/mis-pedidos" style={styles.navButton}>Consultar Productos</Button>
+        <Button href="/mi-inventario" style={styles.navButton}>Ver mi Inventario</Button>
         <Button href="/login" style={styles.navButton} onClick={handleLogout}>Logout</Button>
       </>
     )

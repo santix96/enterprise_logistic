@@ -4,23 +4,26 @@ const conveyorSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      unique: true,
       required: true,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     },
-    neighborhood: {
+    neighborhood:  {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Neighborhood'
+    },
+    zone: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Zone'
     },
     route: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Route'
     },
   },
-  { timestamps: true },
+  { timestamps: true, versionKey: false  },
 );
 
 const Conveyor = mongoose.model('Conveyor', conveyorSchema);

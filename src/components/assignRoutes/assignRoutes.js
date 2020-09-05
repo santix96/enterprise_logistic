@@ -1,158 +1,203 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useEffect, useState } from "react";
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
+import TableContainer from '@material-ui/core/TableContainer';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import Checkbox from '@material-ui/core/Checkbox';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: 'auto',
-  },
-  cardHeader: {
-    padding: theme.spacing(1, 2),
-  },
-  list: {
-    width: 200,
-    height: 230,
-    backgroundColor: theme.palette.background.paper,
-    overflow: 'auto',
-  },
-  button: {
-    margin: theme.spacing(0.5, 0),
-  },
-}));
+import { getRoutes, getConveyorsByZone, getOrdersByRoute, assignRoutes, updateConveyor, assignConveyor } from '../../services/services.js';
 
-function not(a, b) {
-  return a.filter((value) => b.indexOf(value) === -1);
-}
-
-function intersection(a, b) {
-  return a.filter((value) => b.indexOf(value) !== -1);
-}
-
-function union(a, b) {
-  return [...a, ...not(b, a)];
-}
-
-export default function TransferList() {
-  const classes = useStyles();
-  const [checked, setChecked] = React.useState([]);
-  const [left, setLeft] = React.useState([0, 1, 2, 3]);
-  const [right, setRight] = React.useState([4, 5, 6, 7]);
-
-  const leftChecked = intersection(checked, left);
-  const rightChecked = intersection(checked, right);
-
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
+const AssignRoutes = () => {
+  const useStyles = makeStyles( (theme) => ({
+    root: {
+     flexGrow: 1,
+     marginTop: 30,
+     oveflow: "auto",
+     display: 'flex',
+     maxWidth: "100%"
+    },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 320,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+    titlesGrid: {
+      marginTop: '15px',
+    },
+    saveButton: {
+      marginTop: '25px'
     }
+  }));
 
-    setChecked(newChecked);
-  };
+  const [conveyors, setConveyors] = React.useState([]);
+  const [conveyor, setConveyor] = React.useState({});
 
-  const numberOfChecked = (items) => intersection(checked, items).length;
+  const [orders, setOrders] = React.useState([]);
+  const [assignedOrders, setAssignedOrders] = React.useState([]);
 
-  const handleToggleAll = (items) => () => {
-    if (numberOfChecked(items) === items.length) {
-      setChecked(not(checked, items));
-    } else {
-      setChecked(union(checked, items));
-    }
-  };
+  const [routes, setRoutes] = React.useState([]);
+  const [route, setRoute] = React.useState({});
 
-  const handleCheckedRight = () => {
-    setRight(right.concat(leftChecked));
-    setLeft(not(left, leftChecked));
-    setChecked(not(checked, leftChecked));
-  };
+  const [checkbox, setCheckbox] = React.useState('false');
 
-  const handleCheckedLeft = () => {
-    setLeft(left.concat(rightChecked));
-    setRight(not(right, rightChecked));
-    setChecked(not(checked, rightChecked));
-  };
-
-  const customList = (title, items) => (
-    <Card>
-      <CardHeader
-        className={classes.cardHeader}
-        avatar={
-          <Checkbox
-            onClick={handleToggleAll(items)}
-            checked={numberOfChecked(items) === items.length && items.length !== 0}
-            indeterminate={numberOfChecked(items) !== items.length && numberOfChecked(items) !== 0}
-            disabled={items.length === 0}
-            inputProps={{ 'aria-label': 'all items selected' }}
-          />
+  const handleCheckbox = (event) => {
+    event.preventDefault();
+    if (checkbox == false) {
+      setCheckbox(true)
+      const orderId = event.target.id;
+      orders.map( (order) => {
+        if(order._id == orderId){
+          order.state = "Pendiente";
+          order.route = '';
+          const update = assignedOrders.concat(order);
+          setAssignedOrders(update);
         }
-        title={title}
-        subheader={`${numberOfChecked(items)}/${items.length} selected`}
-      />
-      <Divider />
-      <List className={classes.list} dense component="div" role="list">
-        {items.map((value) => {
-          const labelId = `transfer-list-all-item-${value}-label`;
+      })
+    }else{
+      setCheckbox(false);
+      const orderId = event.target.id;
+      orders.map( (order) => {
+        if(order._id == orderId){
+          order.state = "Asignado";
+          order.route = route;
+          const update = assignedOrders.concat(order);
+          setAssignedOrders(update);
+        }
+      })
+    }
+  }
+  const handleAssign = (event) => {
+    event.preventDefault();
+    /* Asociar id ruta a la ruta del transportador */
+    const update = conveyor;
+    update.route = route;
+    assignConveyor(update)
+    assignRoutes(assignedOrders);
+  }
+  const handleConveyorChange = async (event) => {
+     setConveyor(event.target.value);
+  };
 
-          return (
-            <ListItem key={value} role="listitem" button onClick={handleToggle(value)}>
-              <ListItemIcon>
-                <Checkbox
-                  checked={checked.indexOf(value) !== -1}
-                  tabIndex={-1}
-                  disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
-                />
-              </ListItemIcon>
-              <ListItemText id={labelId} primary={`List item ${value + 1}`} />
-            </ListItem>
-          );
-        })}
-        <ListItem />
-      </List>
-    </Card>
-  );
+  const handleRouteChange = async (event) => {
+    setRoute(event.target.value)
+    let responseConveyors = await getConveyorsByZone(event.target.value);
+    setConveyors(responseConveyors);
+
+    let responseOrders = await getOrdersByRoute(event.target.value);
+    setOrders(responseOrders);
+  };
+
+  const handleOrdersChange = (event) => {
+    setOrders(event.target.value);
+  };
+
+  const classes = useStyles();
+
+  useEffect( async () => {
+    let responseRoutes = await getRoutes();
+    setRoutes(responseRoutes);
+  }, [])
 
   return (
-    <Grid container spacing={2} justify="center" alignItems="center" className={classes.root}>
-      <Grid item>{customList('Choices', left)}</Grid>
-      <Grid item>
-        <Grid container direction="column" alignItems="center">
-          <Button
-            variant="outlined"
-            size="small"
-            className={classes.button}
-            onClick={handleCheckedRight}
-            disabled={leftChecked.length === 0}
-            aria-label="move selected right"
-          >
-            &gt;
-          </Button>
-          <Button
-            variant="outlined"
-            size="small"
-            className={classes.button}
-            onClick={handleCheckedLeft}
-            disabled={rightChecked.length === 0}
-            aria-label="move selected left"
-          >
-            &lt;
-          </Button>
+    <Container>
+        <Typography variant='h1'>
+          Asignar Rutas
+        </Typography>
+        <br></br>
+        <Grid container spacing={4} justify="center">
+          <Grid item xs={12} md={6} style={{ paddingRight: window.innerHeight < 992 ? '15px' : '0px'}}>
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label">Seleccione una Ruta</InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                value={route}
+                onChange={handleRouteChange}
+                label="Seleccione una Ruta"
+              >
+                {
+                  routes.map( (selectedRoute) => (
+                    <MenuItem value={selectedRoute.zone}>{selectedRoute.label}</MenuItem>
+                  ))
+                }
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label">Seleccione un Transportador</InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                value={conveyor}
+                onChange={handleConveyorChange}
+                label="Seleccione una Ruta"
+              >
+                {
+                  conveyors.map( (conv) => (
+                    <MenuItem value={conv}>{conv.name}</MenuItem>
+                  ))
+                }
+              </Select>
+            </FormControl>
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid item>{customList('Chosen', right)}</Grid>
-    </Grid>
-  );
+        <form id='assignForm' onSubmit={handleAssign}>
+          <Paper>
+            <TableContainer component={Paper}>
+              <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell></TableCell>
+                    <TableCell align="right"><strong>Distribuidor</strong></TableCell>
+                    <TableCell align="right"><strong>Ruta</strong></TableCell>
+                    <TableCell align="right"><strong>Estado</strong></TableCell>
+                    <TableCell align="right"><strong>Fecha de Solicitud</strong></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {orders.map((order) => (
+                    <TableRow key={order._id}>
+                      <TableCell component="th" scope="row">
+                        <Checkbox
+                          id={order._id}
+                          color="primary"
+                          inputProps={{ 'aria-label': 'secondary checkbox' }}
+                          style={{paddingTop: '2px'}}
+                          onChange={handleCheckbox}
+                        />
+                      </TableCell>
+                      <TableCell align="right">{order.distributor}</TableCell>
+                      <TableCell align="right">{order.route}</TableCell>
+                      <TableCell align="right">{order.state}</TableCell>
+                      <TableCell align="right">{order.createdAt}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+        </form>
+        <Button type='submit' form='assignForm' variant='contained' color='primary' className={classes.saveButton}>
+          Guardar Ruta
+        </Button>
+    </Container>
+  )
 }
+
+export default AssignRoutes;

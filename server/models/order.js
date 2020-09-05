@@ -2,28 +2,24 @@ import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema(
   {
-    product: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
-      }
-    ],
-    quantity: {
-      type: Number,
-      unique: true,
-      required: true,
+    distributor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Distributor'
     },
     route: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Route'
     },
-    total: {
-      type: Number,
-      unique: true,
+    neighborhood: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Neighborhood'
+    },
+    state: {
+      type: String,
       required: true,
     },
   },
-  { timestamps: true },
+  { timestamps: true, versionKey: false },
 );
 
 const Order = mongoose.model('Order', orderSchema);

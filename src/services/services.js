@@ -1,75 +1,60 @@
-import axios from 'axios';
+import { getProducts, getProduct, createProduct, deleteProduct, updateProduct } from './componentServices/products';
+import { getRoutes, getRoute, createRoute, updateRoute, deleteRoute } from './componentServices/routes';
+import { getConveyors, getConveyor, getConveyorsByZone, createConveyor, deleteConveyor, updateConveyor, assignConveyor } from './componentServices/conveyors';
+import { getOrders, getOrder, getOrdersByRoute, createOrder, deleteOrder, updateOrder, assignRoutes } from './componentServices/orders';
+import { getDistributors, getDistributor, createDistributor, deleteDistributor, updateDistributor } from './componentServices/distributors';
+import { getProviders, getProvider, createProvider, deleteProvider, updateProvider } from './componentServices/providers';
+import { getInventory, getById, addRegistry, deleteRegistry, updateRegistry } from './componentServices/inventory';
+import { getZones, getZone, createZone, deleteZone, updateZone } from './componentServices/zones';
+import { getUsers, getUserByEmail } from './componentServices/users';
+import { getOrdersByProduct } from './componentServices/ordersByProduct';
 
-let url = 'http://localhost:4000/products/'
-
-const getProducts = async () => {
-  let response = await fetch(url);
-  let responseData = await response.json();
-  return responseData;
+export {
+  getProducts,
+  getProduct,
+  createProduct,
+  deleteProduct,
+  updateProduct,
+  getRoutes,
+  getRoute,
+  createRoute,
+  updateRoute,
+  deleteRoute,
+  getConveyors,
+  getConveyor,
+  getConveyorsByZone,
+  createConveyor,
+  deleteConveyor,
+  updateConveyor,
+  assignConveyor,
+  getOrders,
+  getOrder,
+  getOrdersByRoute,
+  createOrder,
+  deleteOrder,
+  updateOrder,
+  assignRoutes,
+  getDistributors,
+  getDistributor,
+  createDistributor,
+  deleteDistributor,
+  updateDistributor,
+  getProviders,
+  getProvider,
+  createProvider,
+  deleteProvider,
+  updateProvider,
+  getUserByEmail,
+  getUsers,
+  getInventory,
+  getById,
+  addRegistry,
+  deleteRegistry,
+  updateRegistry,
+  getOrdersByProduct,
+  getZones,
+  getZone,
+  createZone,
+  deleteZone,
+  updateZone
 };
-
-const getProduct = async (id) => {
-  let response = await fetch(url);
-  let responseData = await response.json();
-  return responseData;
-};
-
-const createProduct = async (target) => {
-  const product = {
-    name: target[1].value,
-    provider: target[2].value,
-    buyPrice: target[3].value,
-    weigh: target[4].value,
-    weighUnit: target[5].value
-  }
-
-   fetch(url, {
-      // Adding method type
-      method: "POST",
-      // Adding body or contents to send
-      body: JSON.stringify(product),
-      // Adding headers to the request
-      headers: {
-          "Content-type": "application/json; charset=UTF-8"
-      }
-  })
-  .catch(error => console.error('Error:', error))
-  .then(response => response.json())
-}
-
-const deleteProduct = async (item) => {
-  console.log("ID ON SERVICES", item._id)
-   fetch(url + item._id, {
-    method: 'DELETE',
-    body: JSON.stringify(item),
-    headers: {
-        "Content-type": "application/json; charset=UTF-8"
-    }
-  })
-  .catch(error => console.error('Error:', error))
-  .then(res => res.text()) // or res.json()
-  .then(res => console.log("Product deleted..", res))
-}
-
-const updateProduct = (target) => {
-  const product = {
-    _id: target[0].value,
-    name: target[1].value,
-    provider: target[2].value,
-    buyPrice: target[3].value,
-    weigh: target[4].value,
-    weighUnit: target[5].value,
-  }
-  console.log("UPDATE PRODUCT", product);
-  fetch(url+product._id, {
-     method: "PUT",
-     body: JSON.stringify(product),
-     headers: {
-       "Content-type": "application/json; charset=UTF-8"
-     }
-   })
- .catch(error => console.error('Error:', error))
- .then(response => response.json())
-}
-
-export { getProducts, getProduct, createProduct, deleteProduct, updateProduct};
