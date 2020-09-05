@@ -82,6 +82,6 @@ connectDb().then(async () => {
     //cleanDatabase();
 
     /* Para poblar las tablas */
-    //seedInitialData();
+    seedInitialData();
   });
 });

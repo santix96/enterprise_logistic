@@ -12,14 +12,10 @@ import Button from '@material-ui/core/Button';
 import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-
-
-
 import Checkbox from '@material-ui/core/Checkbox';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-
 import { makeStyles } from '@material-ui/core/styles';
 
 import { getRoutes, getConveyorsByZone, getOrdersByRoute, assignRoutes, updateConveyor, assignConveyor } from '../../services/services.js';
@@ -29,6 +25,7 @@ const AssignRoutes = () => {
     root: {
      flexGrow: 1,
      marginTop: 30,
+     oveflow: "auto",
      display: 'flex',
      maxWidth: "100%"
     },
@@ -54,11 +51,9 @@ const AssignRoutes = () => {
   const [assignedOrders, setAssignedOrders] = React.useState([]);
 
   const [routes, setRoutes] = React.useState([]);
-  const [route, setRoute] = React.useState('');
+  const [route, setRoute] = React.useState({});
 
   const [checkbox, setCheckbox] = React.useState('false');
-
-  const [selectedRoute, setselectedRoute] = React.useState('');
 
   const handleCheckbox = (event) => {
     event.preventDefault();
@@ -99,8 +94,8 @@ const AssignRoutes = () => {
   };
 
   const handleRouteChange = async (event) => {
-    let responseConveyors = await getConveyorsByZone(event.target.value);
     setRoute(event.target.value)
+    let responseConveyors = await getConveyorsByZone(event.target.value);
     setConveyors(responseConveyors);
 
     let responseOrders = await getOrdersByRoute(event.target.value);
@@ -125,7 +120,7 @@ const AssignRoutes = () => {
         </Typography>
         <br></br>
         <Grid container spacing={4} justify="center">
-          <Grid item xs={3} md={6}>
+          <Grid item xs={12} md={6} style={{ paddingRight: window.innerHeight < 992 ? '15px' : '0px'}}>
             <FormControl variant="outlined" className={classes.formControl}>
               <InputLabel id="demo-simple-select-outlined-label">Seleccione una Ruta</InputLabel>
               <Select
@@ -136,8 +131,8 @@ const AssignRoutes = () => {
                 label="Seleccione una Ruta"
               >
                 {
-                  routes.map( (route) => (
-                    <MenuItem value={route.zone}>{route.label}</MenuItem>
+                  routes.map( (selectedRoute) => (
+                    <MenuItem value={selectedRoute.zone}>{selectedRoute.label}</MenuItem>
                   ))
                 }
               </Select>

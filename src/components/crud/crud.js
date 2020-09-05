@@ -17,11 +17,22 @@ const Crud = ({
   updateAction,
   deleteAction
 }) => {
+  const [width, setWidth] = React.useState(window.innerWidth);
+
+  const updateWidth = () => {
+    setWidth(window.innerWidth);
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  });
+
   return (
       <Container>
         <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Typography variant="h1" component="h2" gutterBottom>
+          <Grid item xs={12} mx={6}>
+            <Typography variant={width > 992 ? 'h1' : 'h2'} component="h2" gutterBottom>
               {label}
             </Typography>
           </Grid>
