@@ -41,6 +41,7 @@ function userInformation(userState = initialUserState, action) {
             roleUser: action.roleUser
         }
         localStorage.setItem('userState', JSON.stringify(userState));
+        console.log('Entre al set en el redux', JSON.stringify(userState) )
       return userState;
 
     case RESET_USER_STATE:

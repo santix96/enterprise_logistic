@@ -15,10 +15,10 @@ let UserController = {
     }
   },
   Login: async (req, res) => {
-    var user = await models.User.find({ email: req.body.email, passwordHash: req.body.password }).exec();
+    var user = await models.User.find({ email: req.body.email, passwordHash: req.body.password });
     console.log("USER ON CONTROLLER", user)
     if (user) {
-        res.send(user[0]);
+      res.status(200).json(user);
     } else {
         res.sendStatus(404);
     }

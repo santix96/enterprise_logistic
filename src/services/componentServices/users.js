@@ -1,4 +1,4 @@
-let url = 'http://localhost:4000/users/'
+let url = 'http://localhost:4000/users/';
 
 const getUsers = async () => {
   let response = await fetch(url);
@@ -18,24 +18,24 @@ const login = async (email, password) => {
     email: email,
     password: password
   }
-  let w;
 
-  fetch(url, {
-      // Adding method type
-      method: "POST",
-      // Adding body or contents to send
-      body: JSON.stringify(user),
-      // Adding headers to the request
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
-    .catch(error => console.error('Error:', error))
-    .then( (response) => {
-      response.json().then( (user) => {
-        console.log("USERRR", user)
-      })
-    })
+  return fetch(url, {
+    // Adding method type
+    method: 'POST',
+    // Adding body or contents to send
+    body: JSON.stringify(user), // data can be `string` or {object}!
+    // Adding headers to the request
+    headers:{
+      'Content-Type': 'application/json'
+    }
+  }).then(res => res.json())
+  .catch(error => {
+    console.error("El usuario ingresado no se encunetra registrado en el sistema", error);
+  })
+  .then(response => {
+    console.log('Success: ', response[0])
+    return response[0];
+  });
 
 }
 

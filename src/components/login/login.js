@@ -67,15 +67,10 @@ const Login = ({ roleUser, setRoleUser, userId, setUserId }) => {
     role: 'PROVIDER'
   }
 
-  const [users, setUsers] = useState([]);
-  const [w, setW] = useState([]);
-
   const [data, setData] = useState({
     email: '',
     password: ''
   });
-
-  let { email, password} = data;
 
   const onChange = (e) => {
     setData({ ...data,[e.target.name]: e.target.value });
@@ -83,33 +78,13 @@ const Login = ({ roleUser, setRoleUser, userId, setUserId }) => {
 
     const onSubmitLogin =  async (event) => {
       event.preventDefault();
-      email = event.target[0].value;
-      password = event.target[2].value;
-      const fetchedUser = await login(email, password).then( (y) => {
-        console.log("YYYY", y)
-      });
-      /* Validar con la data de la BD */
-      let x = {};
-      const fetchedUsers = await getUsers();
-      console.log("fetchedUser", fetchedUser);
-
-      fetchedUsers.forEach((user, i) => {
-        if (user.email == email) {
-          x = user
-        }
-      });
-
-      console.log("X", x);
-
-      if(password == x.passwordHash){
-        setRoleUser(x.type);
-        if (x.type == "PROVIDER") {
-          setUserId(x.userId)
-          console.log("--->", userId)
-        }
-      }else{
-        /* validar si el formato es correcto */
-        alert("Usuario o Contraseña incorrectas");
+      setData({...data, 'email': event.target[0].value});
+      setData({...data, 'password': event.target[2].value});
+      
+      const fetchedUser = await login(data.email, data.password);
+      console.log('fetch en login ', fetchedUser);
+      if (fetchedUser){
+        setRoleUser(fetchedUser.type);
       }
     }
 
@@ -134,7 +109,7 @@ const Login = ({ roleUser, setRoleUser, userId, setUserId }) => {
             name="email"
             autoComplete="email"
             autoFocus
-            value={email}
+            value={data.email}
             onChange={onChange}
           />
           <TextField
@@ -147,7 +122,7 @@ const Login = ({ roleUser, setRoleUser, userId, setUserId }) => {
             type="password"
             id="password"
             autoComplete="current-password"
-            value={password}
+            value={data.password}
             onChange={onChange}
           />
           <FormControlLabel

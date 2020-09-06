@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Crud from '../crud';
-import {
-  getRoutes
-} from '../../services/services.js'
-import { createRoute, updateRoute, deleteRoute } from '../../services/services'
+import { getRoutes } from '../../services/services.js';
+import { createRoute, updateRoute, deleteRoute } from '../../services/services';
 
 const RoutesCrud = () => {
   const [data, setData] = useState([{"status": "NO DATA"}])
 
   useEffect( async () => {
     let responseData = await getRoutes();
-
     setData(responseData);
   }, [])
 
