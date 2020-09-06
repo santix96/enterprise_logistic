@@ -12,6 +12,8 @@ import ZonesCrud from '../zonesCrud';
 import RoutesInventory from '../routesInventory';
 import ProviderInventory from '../providerInventory';
 import RoutesOdersByProduct from '../ordersByProductRoute/routesOrdersByProduct';
+import ConveyorTracing from '../conveyorTracing';
+
 
 import SignupTypeSelector from '../signup/signupTypeSelector';
 import DistributorSignUp from '../signup/distributor';
@@ -49,6 +51,12 @@ const Routes = ({ roleUser }) => {
       <Route path = '/rutas'
         exact component = {
           RoutesCrud
+        }
+      />
+
+    <Route path = '/seguimiento-transportadores'
+        exact component = {
+          ConveyorTracing
         }
       />
 

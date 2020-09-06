@@ -6,7 +6,7 @@ import { getDistributors, getDistributor, createDistributor, deleteDistributor, 
 import { getProviders, getProvider, createProvider, deleteProvider, updateProvider } from './componentServices/providers';
 import { getInventory, getById, addRegistry, deleteRegistry, updateRegistry } from './componentServices/inventory';
 import { getZones, getZone, createZone, deleteZone, updateZone } from './componentServices/zones';
-import { getUsers, getUserByEmail } from './componentServices/users';
+import { getUsers, getUserByEmail, login } from './componentServices/users';
 import { getOrdersByProduct } from './componentServices/ordersByProduct';
 
 export {
@@ -56,5 +56,6 @@ export {
   getZone,
   createZone,
   deleteZone,
-  updateZone
+  updateZone,
+  login
 };

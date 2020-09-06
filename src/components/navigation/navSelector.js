@@ -5,6 +5,9 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
 
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
@@ -14,13 +17,41 @@ import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 
 import CrudButton from '../crud/children/crudButton';
-import { resetUserState } from '../../services/userSession'
-import styles from './styles.js'
+import LanguageButton from '../languageButton/languageButton';
+import { resetUserState } from '../../services/userSession';
+import styles from './styles.js';
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 250,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  selector: {
+    paddingTop: '15px'
+  },
+  navButton: {
+    fontWeigh: '500'
+  }
+}));
 
 const NavSelector = ({ roleUser, resetUserState, ...props }) => {
   const handleLogout = () => {
     resetUserState();
   }
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const classes = useStyles();
 
   if (roleUser == 'ADMIN') {
     return(
@@ -33,15 +64,27 @@ const NavSelector = ({ roleUser, resetUserState, ...props }) => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Button href="/inventario" style={styles.navButton}>Inventario</Button>
+            <Button className={classes.navButton} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+              Gestion
+            </Button>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}><a href="/inventario">Inventario</a></MenuItem>
+              <MenuItem onClick={handleClose}><a href="/rutas">Rutas</a></MenuItem>
+              <MenuItem onClick={handleClose}><a href="/zonas">Zonas</a></MenuItem>
+              <MenuItem onClick={handleClose}><a href="/pedidos">Pedidos</a></MenuItem>
+              <MenuItem onClick={handleClose}><a href="/transportadores">Transportadores</a></MenuItem>
+              <MenuItem onClick={handleClose}><a href="/distribuidores">Distribuidores</a></MenuItem>
+              <MenuItem onClick={handleClose}><a href="/proveedores">Proveedores</a></MenuItem>
+              <MenuItem onClick={handleClose}><a href="/productos">Productos</a></MenuItem>
+            </Menu>
             <Button href="/asignar-rutas" style={styles.navButton}>Asignar Rutas</Button>
-            <Button href="/pedidos" style={styles.navButton}>Pedidos</Button>
-            <Button href="/rutas" style={styles.navButton}>Rutas</Button>
-            <Button href="/zonas" style={styles.navButton}>Zonas</Button>
-            <Button href="/transportadores" style={styles.navButton}>Transportadores</Button>
-            <Button href="/distribuidores" style={styles.navButton}>Distribuidores</Button>
-            <Button href="/proveedores" style={styles.navButton}>Proveedores</Button>
-            <Button href="/productos" style={styles.navButton}>Productos</Button>
+            <Button href="/seguimiento-transportadores" style={styles.navButton}>Seguimiento Transportadores</Button>
             <Button href="/login" style={styles.navButton} onClick={handleLogout}>Logout</Button>
           </Grid>
         </Grid>

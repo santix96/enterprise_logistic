@@ -31,7 +31,7 @@ const AssignRoutes = () => {
     },
     formControl: {
       margin: theme.spacing(1),
-      minWidth: 320,
+      minWidth: width > 550 ? 320 : '100%',
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
@@ -54,6 +54,11 @@ const AssignRoutes = () => {
   const [route, setRoute] = React.useState({});
 
   const [checkbox, setCheckbox] = React.useState('false');
+  const [width, setWidth] = useState(window.innerWidth);
+
+  const updateWidth = () => {
+    setWidth(window.innerWidth);
+  };
 
   const handleCheckbox = (event) => {
     event.preventDefault();
@@ -113,9 +118,14 @@ const AssignRoutes = () => {
     setRoutes(responseRoutes);
   }, [])
 
+  useEffect(() => {
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  });
+
   return (
     <Container>
-        <Typography variant='h1'>
+        <Typography variant={width > 455 ? 'h1' : 'h2'}>
           Asignar Rutas
         </Typography>
         <br></br>

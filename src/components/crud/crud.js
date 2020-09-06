@@ -15,7 +15,10 @@ const Crud = ({
   dialogActionDescription,
   createAction,
   updateAction,
-  deleteAction
+  deleteAction,
+  disableEdit,
+  disableDelete,
+  disableCreate
 }) => {
   const [width, setWidth] = React.useState(window.innerWidth);
 
@@ -44,6 +47,8 @@ const Crud = ({
               editActionDescription={dialogActionDescription}
               updateAction={updateAction}
               deleteAction={deleteAction}
+              disableEdit={disableEdit}
+              disableDelete={disableDelete}
             />
           </Grid>
           <Grid item xs={12}>

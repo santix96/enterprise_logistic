@@ -6,13 +6,38 @@ const getUsers = async () => {
   return responseData;
 };
 
-
 const getUserByEmail = async (email, password) => {
   let response = await fetch(url);
   let responseData = await response.json();
 
   return responseData;
 };
+
+const login = async (email, password) => {
+  const user = {
+    email: email,
+    password: password
+  }
+  let w;
+
+  fetch(url, {
+      // Adding method type
+      method: "POST",
+      // Adding body or contents to send
+      body: JSON.stringify(user),
+      // Adding headers to the request
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+    .catch(error => console.error('Error:', error))
+    .then( (response) => {
+      response.json().then( (user) => {
+        console.log("USERRR", user)
+      })
+    })
+
+}
 
 const createUser = async (target) => {
   const product = {
@@ -76,5 +101,6 @@ const updateUser = (target) => {
 
 export {
   getUsers,
-  getUserByEmail
+  getUserByEmail,
+  login
 }

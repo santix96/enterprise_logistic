@@ -16,7 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import { setRoleUser, resetUserState, getRoleUser, setUserId } from '../../services/userSession'
-import { getUsers, getUserByEmail } from '../../services/services'
+import { getUsers, getUserByEmail, login } from '../../services/services'
 
 
 function Copyright() {
@@ -68,6 +68,7 @@ const Login = ({ roleUser, setRoleUser, userId, setUserId }) => {
   }
 
   const [users, setUsers] = useState([]);
+  const [w, setW] = useState([]);
 
   const [data, setData] = useState({
     email: '',
@@ -84,9 +85,13 @@ const Login = ({ roleUser, setRoleUser, userId, setUserId }) => {
       event.preventDefault();
       email = event.target[0].value;
       password = event.target[2].value;
+      const fetchedUser = await login(email, password).then( (y) => {
+        console.log("YYYY", y)
+      });
       /* Validar con la data de la BD */
       let x = {};
       const fetchedUsers = await getUsers();
+      console.log("fetchedUser", fetchedUser);
 
       fetchedUsers.forEach((user, i) => {
         if (user.email == email) {

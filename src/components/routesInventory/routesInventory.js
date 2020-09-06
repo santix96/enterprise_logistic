@@ -21,6 +21,8 @@ const InventoryCrud = () => {
       createAction={addRegistry}
       updateAction={updateRegistry}
       deleteAction={deleteRegistry}
+      disableEdit={true}
+      disableDelete={true}
     />
   );
 }

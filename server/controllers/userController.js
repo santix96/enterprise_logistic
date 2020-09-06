@@ -14,6 +14,15 @@ let UserController = {
         res.sendStatus(404);
     }
   },
+  Login: async (req, res) => {
+    var user = await models.User.find({ email: req.body.email, passwordHash: req.body.password }).exec();
+    console.log("USER ON CONTROLLER", user)
+    if (user) {
+        res.send(user[0]);
+    } else {
+        res.sendStatus(404);
+    }
+  }
 }
 
 module.exports = UserController;
